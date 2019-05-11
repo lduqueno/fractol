@@ -1,0 +1,65 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/03/05 12:00:43 by lduqueno          #+#    #+#             */
+/*   Updated: 2019/05/11 18:09:55 by lduqueno         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "fractol.h"
+
+/*
+**	Print the usage of the program, and all the available fractals
+*/
+
+static int		print_usage(t_fract *fractals)
+{
+	int		i;
+
+	i = 0;
+	ft_printf("Fractol usage : ./fractol <fractal>\nAvailable fractals : ");
+	while (i < FRACTAL_COUNT)
+	{
+		if (i > 0)
+			ft_printf(", ");
+		ft_printf("%s", fractals[i].name);
+		i++;
+	}
+	ft_printf(".\n");
+	return (EXIT_FAILURE);
+}
+
+/*
+**	Init our main struct t_data
+**	(setting all pointers to NULL, creating window, hooking inputs..)
+*/
+
+static void		init_mlx(t_data *data)
+{
+	if (!(data->mlx_ptr = mlx_init()))
+		error(data, MALLOC_ERROR);
+	data->win_title = ft_strjoin("Fractol - ", data->fract->name);
+	data->win_ptr = mlx_new_window(data->mlx_ptr, WIN_X, WIN_Y
+		, data->win_title);
+	data->img_ptr = mlx_new_image(data->mlx_ptr, WIN_X, WIN_Y);
+	mlx_hook(data->win_ptr, 17, 0, input_red_cross, data);
+	mlx_hook(data->win_ptr, 6, 0, input_mouse_move, data);
+	mlx_hook(data->win_ptr, 2, 0, input_keyboard, data);
+	mlx_loop(data->mlx_ptr);
+}
+
+int				main(int ac, char **av)
+{
+	t_data		data;
+	t_fract		*fractals;
+
+	fractals = init_fractals();
+	if (ac != 2 || !(data.fract = get_fractal_by_name(fractals, av[1])))
+		return (print_usage(fractals));
+	init_mlx(&data);
+	return (EXIT_SUCCESS);
+}
