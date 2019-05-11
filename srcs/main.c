@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:00:43 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/11 18:09:55 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/11 18:51:08 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,24 @@ static int		print_usage(t_fract *fractals)
 
 static void		init_mlx(t_data *data)
 {
-	if (!(data->mlx_ptr = mlx_init()))
+	int		avoid;
+
+	data->mlx_ptr = NULL;
+	data->win_ptr = NULL;
+	data->img_ptr = NULL;
+	data->pixels = NULL;
+	if (!(data->win_title = ft_strjoin("Fractol - ", data->fract->name)))
 		error(data, MALLOC_ERROR);
-	data->win_title = ft_strjoin("Fractol - ", data->fract->name);
-	data->win_ptr = mlx_new_window(data->mlx_ptr, WIN_X, WIN_Y
-		, data->win_title);
-	data->img_ptr = mlx_new_image(data->mlx_ptr, WIN_X, WIN_Y);
-	mlx_hook(data->win_ptr, 17, 0, input_red_cross, data);
-	mlx_hook(data->win_ptr, 6, 0, input_mouse_move, data);
-	mlx_hook(data->win_ptr, 2, 0, input_keyboard, data);
-	mlx_loop(data->mlx_ptr);
+	if (!(data->mlx_ptr = mlx_init()))
+		error(data, MLX_ERROR);
+	if (!(data->win_ptr = mlx_new_window(data->mlx_ptr, WIN_X, WIN_Y,
+			data->win_title)))
+		error(data, MLX_ERROR);
+	if (!(data->img_ptr = mlx_new_image(data->mlx_ptr, WIN_X, WIN_Y)))
+		error(data, MLX_ERROR);
+	if (!(data->pixels = (unsigned int *)mlx_get_data_addr(data->img_ptr,
+			&avoid, &avoid, &avoid)))
+		error(data, MLX_ERROR);
 }
 
 int				main(int ac, char **av)
@@ -61,5 +69,10 @@ int				main(int ac, char **av)
 	if (ac != 2 || !(data.fract = get_fractal_by_name(fractals, av[1])))
 		return (print_usage(fractals));
 	init_mlx(&data);
+	mlx_hook(data.win_ptr, 17, 0, input_red_cross, &data);
+	mlx_hook(data.win_ptr, 6, 0, input_mouse_move, &data);
+	mlx_hook(data.win_ptr, 2, 0, input_keyboard, &data);
+	(*(data.fract->execute))(&data);
+	mlx_loop(data.mlx_ptr);
 	return (EXIT_SUCCESS);
 }

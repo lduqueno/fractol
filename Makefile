@@ -6,7 +6,7 @@
 #    By: rlegan <rlegan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/09/13 16:35:11 by rlegan            #+#    #+#              #
-#    Updated: 2019/05/11 17:48:48 by lduqueno         ###   ########.fr        #
+#    Updated: 2019/05/11 18:18:46 by lduqueno         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,9 @@ SRC_FILES = main.c \
 			error.c \
 			free.c \
 			fractal.c \
-			input.c
+			input.c \
+			julia.c \
+			mandelbrot.c
 
 LIBFT_DIR = libft
 

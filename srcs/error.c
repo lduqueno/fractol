@@ -6,21 +6,26 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 16:12:34 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/11 18:04:10 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/11 18:44:00 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int			exit_fractol(t_data *data)
+/*
+** Free all the pointers and exit the program
+*/
+
+int			exit_fractol(t_data *data, t_bool free)
 {
-	free_all(data);
+	if (free)
+		free_all(data);
 	exit(EXIT_SUCCESS);
 	return (EXIT_SUCCESS);
 }
 
 /*
-** Exit function : print a custom error message, free all pointers
+** Error function : print a custom error message, free all pointers
 ** dynamically allocated and exit the program
 */
 
