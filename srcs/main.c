@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:00:43 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/11 18:51:08 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/12 16:03:02 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,12 @@ int				main(int ac, char **av)
 	if (ac != 2 || !(data.fract = get_fractal_by_name(fractals, av[1])))
 		return (print_usage(fractals));
 	init_mlx(&data);
+	init_default_values(&data);
+	draw_image(&data);
 	mlx_hook(data.win_ptr, 17, 0, input_red_cross, &data);
 	mlx_hook(data.win_ptr, 6, 0, input_mouse_move, &data);
+	mlx_hook(data.win_ptr, 4, 0, input_mouse_press, &data);
 	mlx_hook(data.win_ptr, 2, 0, input_keyboard, &data);
-	(*(data.fract->execute))(&data);
 	mlx_loop(data.mlx_ptr);
 	return (EXIT_SUCCESS);
 }
