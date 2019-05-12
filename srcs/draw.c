@@ -6,21 +6,17 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 15:48:38 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/12 16:07:49 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/12 17:55:20 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static unsigned int	color_from_iteration(int iteration, int max_iteration)
+unsigned int	color_from_iteration(int iteration, int max_iteration)
 {
 	if (iteration == max_iteration)
 		return (0x000000);
-	if (iteration < 150)
-		return (0xFF0000);
-	else
-		return (0x00FF00);
-	return (iteration);
+	return (0xFFFFFF / max_iteration * iteration / 10);
 }
 
 void				init_default_values(t_data *data)
@@ -32,7 +28,8 @@ void				init_default_values(t_data *data)
 
 void				draw_image(t_data *data)
 {
-	int			y;
+	test_threads(data);
+	/*int			y;
 	int			x;
 	int			fract_iteration;
 
@@ -49,5 +46,5 @@ void				draw_image(t_data *data)
 		}
 		y++;
 	}
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);*/
 }

@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:01:17 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/12 16:10:11 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/12 17:59:31 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,19 @@
 # include "libft.h"
 # include "mlx.h"
 # include "math.h"
+# include <pthread.h>
 # include <stdio.h>
 
-typedef char t_bool;
-
-# define TRUE	1
-# define FALSE	0
+typedef char			t_bool;
+# define TRUE			1
+# define FALSE			0
 
 # define FRACTAL_COUNT	2
 
-# define WIN_X	1080
-# define WIN_Y	720
+# define WIN_X			1080
+# define WIN_Y			720
 
-# define THREAD_COUNT	50
+# define THREAD_COUNT	15
 
 # define MALLOC_ERROR	"Unable to allocate memory"
 # define MLX_ERROR		"Unable to load the MLX"
@@ -59,6 +59,11 @@ typedef struct		s_fract
 	t_complex		constants;
 	int				(*execute)(t_data *, int, int);
 }					t_fract;
+
+
+void				test_threads(t_data *data);
+unsigned int		color_from_iteration(int iteration, int max_iteration);
+
 
 int					exit_fractol(t_data *data, t_bool free);
 int					error(t_data *data, char *error_msg);

@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:00:43 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/12 16:03:02 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/12 17:55:30 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ int				main(int ac, char **av)
 	init_mlx(&data);
 	init_default_values(&data);
 	draw_image(&data);
+	//test_threads(&data);
 	mlx_hook(data.win_ptr, 17, 0, input_red_cross, &data);
 	mlx_hook(data.win_ptr, 6, 0, input_mouse_move, &data);
 	mlx_hook(data.win_ptr, 4, 0, input_mouse_press, &data);
