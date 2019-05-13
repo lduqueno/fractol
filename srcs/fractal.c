@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 16:32:54 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/13 14:51:22 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/13 16:36:24 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_fract		*init_fractals(void)
 	fractals[0] = (t_fract) { .name = "julia", 200,
 		(t_complex) {.r = -0.7, .i = 0.27015}, .execute = execute_julia };
 	fractals[1] = (t_fract) { .name = "mandelbrot", 300,
-		(t_complex) {.r = 0, .i = 0}, .execute = execute_mandelbrot };
+		.execute = execute_mandelbrot };
 	return (fractals);
 }
 
