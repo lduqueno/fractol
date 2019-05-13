@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 17:48:36 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/12 16:17:51 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/13 16:11:35 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ int			input_mouse_press(int button, int x, int y, t_data *data)
 	(void)y;
 	if (button == 5)
 	{
-		data->zoom -= 0.1;
+		if (data->zoom > 0.2)
+			data->zoom -= 0.1;
 		draw_image(data);
 	}
 	else if (button == 4)

@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 16:58:30 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/13 14:50:38 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/13 16:13:36 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ void				draw_image(t_data *data)
 	int			thread_id;
 	int			last_line;
 
-	thread_id = -1;
+	thread_id = 0;
 	last_line = 0;
-	while (++thread_id < THREAD_COUNT)
+	while (thread_id < THREAD_COUNT)
 	{
 		if (!(context = (t_context *)malloc(sizeof(t_context))))
 			error(data, MALLOC_ERROR);
@@ -75,6 +75,7 @@ void				draw_image(t_data *data)
 		if (context->end_y >= WIN_Y || thread_id == THREAD_COUNT - 1)
 			context->end_y = WIN_Y;
 		pthread_create(&threads[thread_id], NULL, draw_lines_thread, context);
+		thread_id++;
 	}
 	wait_threads(threads);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);

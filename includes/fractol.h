@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:01:17 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/13 14:50:08 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/13 15:45:27 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ typedef char			t_bool;
 
 # define FRACTAL_COUNT	2
 
-# define WIN_X			1080
+# define WIN_X			720
 # define WIN_Y			720
 
-# define THREAD_COUNT	11
+# define THREAD_COUNT	9
 
 # define MALLOC_ERROR	"Unable to allocate memory"
 # define MLX_ERROR		"Unable to load the MLX"
@@ -65,7 +65,9 @@ typedef struct		s_split_context
 	t_data			*data;
 	int				thread_id;
 	int				start_y;
+	int				start_x;
 	int				end_y;
+	int				end_x;
 }					t_context;
 
 int					exit_fractol(t_data *data, t_bool free);
