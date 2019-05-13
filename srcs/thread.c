@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 16:58:30 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/13 16:13:36 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/13 17:36:48 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static unsigned int	color_from_iteration(int iteration, int max_iteration)
 	if (iteration == max_iteration)
 		return (0x000000);
 	return (0xFFFFFF / max_iteration * iteration / 10);
+	//screen.set_at((x, y), ((3 * n) % 256, (1 * n) % 256, (10 * n) % 256))
 }
 
 static void			*draw_lines_thread(void *arg)

@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:01:17 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/13 15:45:27 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/13 17:43:09 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef char			t_bool;
 # define TRUE			1
 # define FALSE			0
 
-# define FRACTAL_COUNT	2
+# define FRACTAL_COUNT	3
 
 # define WIN_X			720
 # define WIN_Y			720
@@ -80,6 +80,7 @@ t_fract				*get_fractal_by_name(t_fract *fractals, char *name);
 void				draw_image(t_data *data);
 int					execute_julia(t_data *data, int y, int x);
 int					execute_mandelbrot(t_data *data, int y, int x);
+int					execute_burningship(t_data *data, int y, int x);
 
 int					input_red_cross(int key, t_data *data);
 int					input_mouse_move(int x, int y, t_data *data);

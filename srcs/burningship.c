@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   julia.c                                            :+:      :+:    :+:   */
+/*   burningship.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/11 18:14:22 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/13 17:43:21 by lduqueno         ###   ########.fr       */
+/*   Created: 2019/05/13 17:40:20 by lduqueno          #+#    #+#             */
+/*   Updated: 2019/05/13 17:55:47 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int				execute_julia(t_data *data, int y, int x)
+int				execute_burningship(t_data *data, int y, int x)
 {
 	int			iteration;
 	t_complex	complex;
@@ -26,8 +26,8 @@ int				execute_julia(t_data *data, int y, int x)
 	tmp_pow.i = complex.i * complex.i;
 	while (iteration < data->fract->max_iteration)
 	{
-		complex.i = 2 * complex.r * complex.i + data->fract->constants.i;
-		complex.r = tmp_pow.r - tmp_pow.i + data->fract->constants.r;
+		complex.i = fabs(2 * complex.r * complex.i) + y;
+		complex.r = fabs(tmp_pow.r - tmp_pow.i + x);
 		tmp_pow.r = complex.r * complex.r;
 		tmp_pow.i = complex.i * complex.i;
 		if (tmp_pow.r + tmp_pow.i >= 4)
