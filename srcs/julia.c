@@ -6,11 +6,13 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 18:14:22 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/13 17:43:21 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/13 18:30:47 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+//Augmenter iteration max quand on zoom
 
 int				execute_julia(t_data *data, int y, int x)
 {
@@ -24,7 +26,7 @@ int				execute_julia(t_data *data, int y, int x)
 	complex.i = (y - WIN_Y / 2) / (0.5 * data->zoom * WIN_Y) + data->move_y;
 	tmp_pow.r = complex.r * complex.r;
 	tmp_pow.i = complex.i * complex.i;
-	while (iteration < data->fract->max_iteration)
+	while (iteration < data->max_iteration)
 	{
 		complex.i = 2 * complex.r * complex.i + data->fract->constants.i;
 		complex.r = tmp_pow.r - tmp_pow.i + data->fract->constants.r;

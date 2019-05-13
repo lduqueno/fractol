@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:00:43 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/13 17:38:23 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/13 18:31:08 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ static void		init_default_values(t_data *data)
 	data->zoom = 1;
 	data->move_x = 0;
 	data->move_y = 0;
+	data->max_iteration = 100;
 }
 
 int				main(int ac, char **av)

@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:01:17 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/13 17:43:09 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/13 18:31:37 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ typedef char			t_bool;
 
 # define FRACTAL_COUNT	3
 
-# define WIN_X			720
-# define WIN_Y			720
+# define WIN_X			600
+# define WIN_Y			600
 
-# define THREAD_COUNT	9
+# define THREAD_COUNT	20
 
 # define MALLOC_ERROR	"Unable to allocate memory"
 # define MLX_ERROR		"Unable to load the MLX"
@@ -49,13 +49,13 @@ typedef struct		s_data
 	double			zoom;
 	double			move_x;
 	double			move_y;
+	int				max_iteration;
 	struct s_fract	*fract;
 }					t_data;
 
 typedef struct		s_fract
 {
 	char			*name;
-	int				max_iteration;
 	t_complex		constants;
 	int				(*execute)(t_data *, int, int);
 }					t_fract;
