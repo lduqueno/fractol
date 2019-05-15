@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:01:17 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/15 19:41:51 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/15 20:17:37 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ typedef struct			s_data
 	double				move_x;
 	double				move_y;
 	int					max_iteration;
+	t_bool				auto_zoom;
 	struct s_fract		*fract;
 	struct s_opencl		*opencl;
 }						t_data;
@@ -115,6 +116,7 @@ int					input_red_cross(int key, t_data *data);
 int					input_mouse_move(int x, int y, t_data *data);
 int					input_mouse_press(int button, int x, int y, t_data *data);
 int					input_keyboard(int keycode, t_data *data);
+int					input_loop(t_data *data);
 
 
 void				init_opencl(t_data *data);

@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:00:43 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/15 19:41:30 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/15 20:04:21 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ void				new_opencl_task(t_data *data)
 		(void *)&output);
 	clSetKernelArg(data->opencl->kernel, 1, sizeof(cl_mem),
 		(void *)&input_data);
+
+	//clEnqueueTask(data->opencl->command_queue, data->opencl->kernel, 0, NULL, NULL);
 	clEnqueueNDRangeKernel(data->opencl->command_queue, data->opencl->kernel,
 		2, NULL, dimensions, NULL, 0, NULL, NULL);
 	clEnqueueReadBuffer(data->opencl->command_queue, output,
