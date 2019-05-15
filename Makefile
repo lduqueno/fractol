@@ -6,13 +6,13 @@
 #    By: rlegan <rlegan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/09/13 16:35:11 by rlegan            #+#    #+#              #
-#    Updated: 2019/05/15 18:00:37 by lduqueno         ###   ########.fr        #
+#    Updated: 2019/05/15 19:41:27 by lduqueno         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
 
-CFLAGS = -Wall -Werror -Wextra #-O2
+CFLAGS = -Wall -Werror -Wextra -O2
 
 MLX_FLAGS = -lmlx -framework OpenGL -framework AppKit -framework OpenCL
 

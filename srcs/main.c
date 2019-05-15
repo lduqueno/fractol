@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:00:43 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/15 18:28:45 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/15 19:34:38 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,10 @@ int				main(int ac, char **av)
 	init_mlx(&data);
 	init_default_values(&data);
 	if (ac == 3 && ft_strequ(av[2], "-opencl"))
-		/*data.opencl = */init_opencl(&data, "opencl/julia.cl", "julia");
+	{
+		init_opencl(&data);
+		//create_context(data.opencl, "julia");
+	}
 	draw_image(&data);
 	mlx_hook(data.win_ptr, 17, 0, input_red_cross, &data);
 	mlx_hook(data.win_ptr, 6, 0, input_mouse_move, &data);

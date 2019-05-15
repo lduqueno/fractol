@@ -6,14 +6,14 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:00:43 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/15 19:17:09 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/15 19:41:30 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "fractol.h"
 
-static void		create_context(t_opencl *cl, char *function_name)
+void			create_context(t_opencl *cl, char *function_name)
 {
 	cl_int			ret;
 
@@ -29,56 +29,43 @@ static void		create_context(t_opencl *cl, char *function_name)
 	cl->kernel = clCreateKernel(cl->program, function_name, &ret);
 }
 
-void				init_opencl(t_data *data, char *file, char *function_name)
+void				init_opencl(t_data *data)
 {
 	t_opencl		*cl;
 	int				fd;
+	char			*file_name;
 
-	if (!(cl = (t_opencl *)malloc(sizeof(t_opencl))))
-		error(data, MALLOC_ERROR);
+	if (!(cl = (t_opencl *)malloc(sizeof(t_opencl))) || !(file_name
+		= ft_strjoin("opencl/", data->fract->name)) || !(file_name
+		= ft_strjoin_free(file_name, ".cl")))
+			error(data, MALLOC_ERROR);
 	cl->device_id = NULL;
 	cl->context = NULL;
 	cl->command_queue = NULL;
 	cl->program = NULL;
 	cl->kernel = NULL;
 	cl->platform_id = NULL;
-	if ((fd = open(file, O_RDONLY)) < 0)
-	{
-		printf("Unable to open file %s!\n", file);
-		return ;
-	}
-	if (!(cl->source_str = (char *)malloc(sizeof(char) * MAX_SOURCE_SIZE)))
-	{
-		close(fd);
-		printf("Malloc error while opening file %s!\n", file);
-		return ;
-	}
+	if ((fd = open(file_name, O_RDONLY)) < 0)
+		error(data, OPEN_ERROR);
+	if (!(cl->source_str = ft_strnew(MAX_SOURCE_SIZE)))
+		error(data, MALLOC_ERROR);
 	if ((cl->source_size = read(fd, cl->source_str, MAX_SOURCE_SIZE)) <= 0)
-	{
-		free(cl->source_str);
-		close(fd);
-		printf("Unable to read file %s!\n", file);
-		return ;
-	}
-	(void)function_name;
+		error(data, READ_ERROR);
 	close(fd);
 	data->opencl = cl;
 }
 
 void				new_opencl_task(t_data *data)
 {
-	//int			result[MEM_SIZE];
-	size_t		dimensions[2] = { WIN_Y, WIN_X };
-	float		raw_data[DATA_COUNT] = { WIN_Y, WIN_X, data->max_iteration,
-		data->zoom, data->move_x, data->move_y };
-	cl_mem		input_data;
-	cl_mem		output;
+	size_t			dimensions[2] = { WIN_X, WIN_Y };
+	cl_mem			input_data;
+	cl_mem			output;
+	float			raw_data[DATA_COUNT] = { WIN_Y, WIN_X, data->max_iteration,
+						data->zoom, data->move_x, data->move_y };
 
-
-	create_context(data->opencl, "julia");
-
+	create_context(data->opencl, data->fract->name);
 	output = clCreateBuffer(data->opencl->context, CL_MEM_READ_WRITE,
-		WIN_Y * WIN_X * sizeof(int), NULL, NULL);
+		MEM_SIZE * sizeof(int), NULL, NULL);
 	input_data = clCreateBuffer(data->opencl->context, CL_MEM_READ_ONLY,
 		sizeof(float) * DATA_COUNT, NULL, NULL);
 	clEnqueueWriteBuffer(data->opencl->command_queue, input_data, CL_TRUE, 0,
@@ -92,19 +79,11 @@ void				new_opencl_task(t_data *data)
 	clEnqueueReadBuffer(data->opencl->command_queue, output,
 		CL_TRUE, 0, MEM_SIZE * sizeof(int), data->pixels, 0, NULL, NULL);
 	clReleaseMemObject(input_data);
-	//clReleaseMemObject(output);
-	clFinish(data->opencl->command_queue);
-	clFlush(data->opencl->command_queue);
-	clFinish(data->opencl->command_queue);
-	clReleaseKernel(data->opencl->kernel);
-	clReleaseProgram(data->opencl->program);
-	clReleaseCommandQueue(data->opencl->command_queue);
-	clReleaseContext(data->opencl->context);
-	// for (int i = 0; i < MEM_SIZE; i++)
-	 //	data->pixels[i] = result[i];
+	clReleaseMemObject(output);
+	close_opencl(data->opencl, FALSE);
 }
 
-void				close_opencl(t_opencl *cl)
+void				close_opencl(t_opencl *cl, t_bool free_program)
 {
 	clFlush(cl->command_queue);
 	clFinish(cl->command_queue);
@@ -112,5 +91,6 @@ void				close_opencl(t_opencl *cl)
 	clReleaseProgram(cl->program);
 	clReleaseCommandQueue(cl->command_queue);
 	clReleaseContext(cl->context);
-	free(cl->source_str);
+	if (free_program)
+		free(cl->source_str);
 }

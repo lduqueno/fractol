@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:01:17 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/15 19:11:42 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/15 19:41:51 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@
 # include <CL/cl.h>
 # endif
 
-//# pragma OPENCL EXTENSION cl_khr_fp64 : enable
-
 typedef char				t_bool;
 
 # define TRUE				1
@@ -34,13 +32,15 @@ typedef char				t_bool;
 
 # define FRACTAL_COUNT		3
 
-# define WIN_X				1080
-# define WIN_Y				720
+# define WIN_X				700
+# define WIN_Y				700
 
 # define THREAD_COUNT		6
 
 # define MALLOC_ERROR		"Unable to allocate memory"
 # define MLX_ERROR			"Unable to load the MLX"
+# define OPEN_ERROR			"Unable to open opencl file"
+# define READ_ERROR			"Unable to read opencl file"
 
 
 # define MEM_SIZE			(WIN_Y * WIN_X)
@@ -52,7 +52,6 @@ typedef struct			s_opencl
 	cl_device_id		device_id;
 	cl_context			context;
 	cl_command_queue	command_queue;
-	//cl_mem				output;
 	cl_program			program;
 	cl_kernel			kernel;
 	cl_platform_id		platform_id;
@@ -118,8 +117,9 @@ int					input_mouse_press(int button, int x, int y, t_data *data);
 int					input_keyboard(int keycode, t_data *data);
 
 
-void				init_opencl(t_data *data, char *file, char *function_name);
+void				init_opencl(t_data *data);
 void				new_opencl_task(t_data *data);
-void				close_opencl(t_opencl *cl);
+void				close_opencl(t_opencl *cl, t_bool free_program);
+void				create_context(t_opencl *cl, char *function_name);
 
 #endif
