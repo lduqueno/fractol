@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 16:32:54 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/15 18:55:26 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/15 20:32:38 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ t_fract		*init_fractals(void)
 		.execute = execute_mandelbrot };
 	fractals[2] = (t_fract) { .name = "burningship",
 		.execute = execute_burningship };
+	fractals[3] = (t_fract) { .name = "tricorn",
+		.execute = execute_tricorn };
 	return (fractals);
 }
 

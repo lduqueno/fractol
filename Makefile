@@ -6,7 +6,7 @@
 #    By: rlegan <rlegan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/09/13 16:35:11 by rlegan            #+#    #+#              #
-#    Updated: 2019/05/15 19:41:27 by lduqueno         ###   ########.fr        #
+#    Updated: 2019/05/15 20:33:18 by lduqueno         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,10 +28,11 @@ SRC_FILES = main.c \
 			fractal.c \
 			input.c \
 			thread.c \
+			opencl.c \
 			julia.c \
 			mandelbrot.c \
 			burningship.c \
-			opencl.c
+			tricorn.c
 
 LIBFT_DIR = libft
 

@@ -1,4 +1,4 @@
-__kernel void mandelbrot(__global int* pixels, __global float *data)
+__kernel void tricorn(__global int* pixels, __global float *data)
 {
 	int iteration = 0;
 	int x = get_global_id(0);
@@ -11,7 +11,7 @@ __kernel void mandelbrot(__global int* pixels, __global float *data)
 	float move_y = data[5];
 	float cRe = 0;
 	float cIm = 0;
-	float constantRe = 1.0 * (x - win_width / 2) / (0.5 * zoom * win_width) + move_x - 0.4;
+	float constantRe = 1.0 * (x - win_width / 2) / (0.5 * zoom * 0.8 * win_width) + move_x - 0.2;
 	float constantIm = (y - win_height / 2) / (0.5 * zoom * win_height) + move_y;
 
 	float powRe = cRe * cRe;
@@ -19,7 +19,7 @@ __kernel void mandelbrot(__global int* pixels, __global float *data)
 
 	while (iteration < max_iteration && powRe + powIm <= 4)
 	{
-		cIm = 2 * cRe * cIm + constantIm;
+		cIm = -2 * cRe * cIm + constantIm;
 		cRe = powRe - powIm + constantRe;
 		powRe = cRe * cRe;
 		powIm = cIm * cIm;
