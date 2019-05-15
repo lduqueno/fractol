@@ -6,13 +6,11 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 18:14:22 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/13 18:30:47 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/15 16:27:41 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
-//Augmenter iteration max quand on zoom
 
 int				execute_julia(t_data *data, int y, int x)
 {

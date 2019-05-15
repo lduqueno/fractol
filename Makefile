@@ -6,15 +6,15 @@
 #    By: rlegan <rlegan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/09/13 16:35:11 by rlegan            #+#    #+#              #
-#    Updated: 2019/05/13 17:40:12 by lduqueno         ###   ########.fr        #
+#    Updated: 2019/05/15 18:00:37 by lduqueno         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
 
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra #-O2
 
-MLX_FLAGS = -lmlx -framework OpenGL -framework AppKit
+MLX_FLAGS = -lmlx -framework OpenGL -framework AppKit -framework OpenCL
 
 NAME = fractol
 
@@ -30,7 +30,8 @@ SRC_FILES = main.c \
 			thread.c \
 			julia.c \
 			mandelbrot.c \
-			burningship.c
+			burningship.c \
+			opencl.c
 
 LIBFT_DIR = libft
 

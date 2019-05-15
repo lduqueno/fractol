@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 16:58:30 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/13 18:32:00 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/15 19:14:28 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ static void			*draw_lines_thread(void *arg)
 		}
 	}
 	free(context);
+	pthread_exit(NULL);
 	return (NULL);
 }
 
@@ -55,7 +56,7 @@ static void			wait_threads(pthread_t *threads)
 	}
 }
 
-void				draw_image(t_data *data)
+static void				draw_image_thread(t_data *data)
 {
 	pthread_t	threads[THREAD_COUNT];
 	t_context	*context;
@@ -79,5 +80,15 @@ void				draw_image(t_data *data)
 		thread_id++;
 	}
 	wait_threads(threads);
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
+}
+
+
+void				draw_image(t_data *data)
+{
+	if (data->opencl == NULL)
+		draw_image_thread(data);
+	else
+		new_opencl_task(data); //todo set pixels to pixels mlx
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
 }

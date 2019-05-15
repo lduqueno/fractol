@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:00:43 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/13 18:31:08 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/15 18:28:45 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ static int		print_usage(t_fract *fractals)
 	int		i;
 
 	i = 0;
-	ft_printf("Fractol usage : ./fractol <fractal>\nAvailable fractals : ");
+	ft_printf("Fractol usage : ./fractol (-opencl) <fractal>\nAvailable"
+		"fractals : ");
 	while (i < FRACTAL_COUNT)
 	{
 		if (i > 0)
@@ -46,6 +47,7 @@ static void		init_mlx(t_data *data)
 	data->win_ptr = NULL;
 	data->img_ptr = NULL;
 	data->pixels = NULL;
+	data->opencl = NULL;
 	if (!(data->win_title = ft_strjoin("Fractol - ", data->fract->name)))
 		error(data, MALLOC_ERROR);
 	if (!(data->mlx_ptr = mlx_init()))
@@ -74,10 +76,12 @@ int				main(int ac, char **av)
 	t_fract		*fractals;
 
 	fractals = init_fractals();
-	if (ac != 2 || !(data.fract = get_fractal_by_name(fractals, av[1])))
+	if (/*ac != 2 || */!(data.fract = get_fractal_by_name(fractals, av[1])))
 		return (print_usage(fractals));
 	init_mlx(&data);
 	init_default_values(&data);
+	if (ac == 3 && ft_strequ(av[2], "-opencl"))
+		/*data.opencl = */init_opencl(&data, "opencl/julia.cl", "julia");
 	draw_image(&data);
 	mlx_hook(data.win_ptr, 17, 0, input_red_cross, &data);
 	mlx_hook(data.win_ptr, 6, 0, input_mouse_move, &data);
