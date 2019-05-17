@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:00:43 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/17 13:18:55 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/17 13:38:21 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@ static void			draw_text(t_data *data)
 	ft_bzero(text, 20);
 	ft_sprintf(text, "Iteration : %d\n", data->max_iteration);
 	mlx_string_put(data->mlx_ptr, data->win_ptr, 5, 5,
+		0xFFFFFF, text);
+	ft_bzero(text, 20);
+	ft_sprintf(text, "Zoom : %.2f\n", data->zoom);
+	mlx_string_put(data->mlx_ptr, data->win_ptr, 5, 5 * 5,
 		0xFFFFFF, text);
 }
 
