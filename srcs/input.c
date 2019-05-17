@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 17:48:36 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/17 13:14:11 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/17 14:15:57 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,16 @@ int			input_keyboard(int keycode, t_data *data)
 		return (exit_fractol(data, TRUE));
 	else if (keycode == KEY_SPACEBAR)
 		data->auto_zoom = !data->auto_zoom;
+	else if (keycode == KEY_UP)
+		data->move_y -= 0.05 / data->zoom;
+	else if (keycode == KEY_DOWN)
+		data->move_y += 0.05 / data->zoom;
+	else if (keycode == KEY_LEFT)
+		data->move_x -= 0.05 / data->zoom;
+	else if (keycode == KEY_RIGHT)
+		data->move_x += 0.05 / data->zoom;
+	else
+		return (1);
+	draw_image(data);
 	return (1);
 }
