@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   opencl.c                                           :+:      :+:    :+:   */
+/*   draw_opencl.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:00:43 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/15 20:20:23 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/17 12:35:26 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "fractol.h"
 
-void			create_context(t_opencl *cl, char *function_name)
+static void			create_opencl_context(t_opencl *cl, char *function_name)
 {
 	cl_int			ret;
 
@@ -55,7 +54,7 @@ void				init_opencl(t_data *data)
 	data->opencl = cl;
 }
 
-void				new_opencl_task(t_data *data)
+void				draw_image_opencl(t_data *data)
 {
 	size_t			dimensions[2] = { WIN_X, WIN_Y };
 	cl_mem			input_data;
@@ -63,7 +62,7 @@ void				new_opencl_task(t_data *data)
 	float			raw_data[DATA_COUNT] = { WIN_Y, WIN_X, data->max_iteration,
 						data->zoom, data->move_x, data->move_y };
 
-	create_context(data->opencl, data->fract->name);
+	create_opencl_context(data->opencl, data->fract->name);
 	output = clCreateBuffer(data->opencl->context, CL_MEM_READ_WRITE,
 		MEM_SIZE * sizeof(int), NULL, NULL);
 	input_data = clCreateBuffer(data->opencl->context, CL_MEM_READ_ONLY,
