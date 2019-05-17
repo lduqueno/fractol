@@ -6,18 +6,19 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 18:15:55 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/17 13:33:29 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/17 15:53:02 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+#include "math.h"
 
 int				execute_tricorn(t_data *data, int y, int x)
 {
-	int			iteration;
-	t_complex	complex;
-	t_complex	tmp_pow;
-	t_complex	constants;
+	unsigned int	iteration;
+	t_complex		complex;
+	t_complex		tmp_pow;
+	t_complex		constants;
 
 	iteration = 0;
 	constants.r = 1.0 * (x - WIN_X / 2) / (0.4 * data->zoom * WIN_X)

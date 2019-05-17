@@ -6,17 +6,18 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 18:14:22 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/17 13:32:40 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/17 15:52:46 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+#include "math.h"
 
 int				execute_julia(t_data *data, int y, int x)
 {
-	int			iteration;
-	t_complex	complex;
-	t_complex	tmp_pow;
+	unsigned int	iteration;
+	t_complex		complex;
+	t_complex		tmp_pow;
 
 	iteration = 0;
 	complex.r = 1.5 * (x - WIN_X / 2) / (0.5 * data->zoom * WIN_X)

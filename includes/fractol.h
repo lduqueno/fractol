@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:01:17 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/17 13:15:10 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/17 17:09:33 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 # define FRACTOL_H
 
 # include "libft.h"
-# include "mlx.h"
-# include "math.h"
-# include <pthread.h>
 # include <stdio.h>
 
 # define CL_SILENCE_DEPRECATION
@@ -38,14 +35,17 @@ typedef char				t_bool;
 
 # define THREAD_COUNT		6
 
+# define MEM_SIZE			(WIN_Y * WIN_X)
+# define MAX_SOURCE_SIZE	(0x100000)
+# define DATA_COUNT			7
+# define COLORS_COUNT		16
+# define MAX_ZOOM			125000
+
 # define MALLOC_ERROR		"Unable to allocate memory"
 # define MLX_ERROR			"Unable to load the MLX"
 # define OPEN_ERROR			"Unable to open opencl file"
 # define READ_ERROR			"Unable to read opencl file"
-
-# define MEM_SIZE			(WIN_Y * WIN_X)
-# define MAX_SOURCE_SIZE	(0x100000)
-# define DATA_COUNT			6
+# define OPENCL_ERROR		"Unable to compute opencl file"
 
 typedef struct			s_opencl
 {
@@ -58,6 +58,7 @@ typedef struct			s_opencl
 	cl_uint				ret_num_devices;
 	cl_uint				ret_num_platforms;
 	size_t				source_size;
+	cl_uint				double_precision_supported;
 	char				*source_str;
 }						t_opencl;
 
@@ -77,7 +78,7 @@ typedef struct			s_data
 	double				zoom;
 	double				move_x;
 	double				move_y;
-	int					max_iteration;
+	unsigned int		max_iteration;
 	t_bool				auto_zoom;
 	unsigned int		auto_zoom_ticks;
 	struct s_fract		*fract;
@@ -119,6 +120,8 @@ int					input_mouse_press(int button, int x, int y, t_data *data);
 int					input_keyboard(int keycode, t_data *data);
 int					input_loop(t_data *data);
 
+int					*get_colors(void);
+int					color_from_iteration(int iteration, int max_iteration);
 void				draw_image(t_data *data);
 void				draw_image_thread(t_data *data);
 void				draw_image_opencl(t_data *data);

@@ -6,19 +6,12 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 16:58:30 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/17 12:35:28 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/17 15:52:27 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
-static unsigned int	color_from_iteration(int iteration, int max_iteration)
-{
-	if (iteration == max_iteration)
-		return (0x000000);
-	return (0xFFFFFF / max_iteration * iteration / 10);
-	//screen.set_at((x, y), ((3 * n) % 256, (1 * n) % 256, (10 * n) % 256))
-}
+#include <pthread.h>
 
 static void			*draw_lines_thread(void *arg)
 {
@@ -80,5 +73,4 @@ void				draw_image_thread(t_data *data)
 		thread_id++;
 	}
 	wait_threads(threads);
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
 }

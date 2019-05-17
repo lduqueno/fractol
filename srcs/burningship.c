@@ -6,18 +6,19 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 17:40:20 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/17 13:32:26 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/17 15:52:38 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+#include "math.h"
 
 int				execute_burningship(t_data *data, int y, int x)
 {
-	int			iteration;
-	t_complex	complex;
-	t_complex	constants;
-	t_complex	tmp_pow;
+	unsigned int	iteration;
+	t_complex		complex;
+	t_complex		constants;
+	t_complex		tmp_pow;
 
 	iteration = 0;
 	complex.r = 1.5 * (x - WIN_X / 2) / (0.45 * data->zoom * WIN_X)

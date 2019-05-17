@@ -6,11 +6,12 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:00:43 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/17 13:11:59 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/17 15:50:29 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+#include "mlx.h"
 
 /*
 **	Print the usage of the program, and all the available fractals
