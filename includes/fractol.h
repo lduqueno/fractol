@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:01:17 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/17 12:30:17 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/17 13:15:10 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ typedef char				t_bool;
 # define MLX_ERROR			"Unable to load the MLX"
 # define OPEN_ERROR			"Unable to open opencl file"
 # define READ_ERROR			"Unable to read opencl file"
-
 
 # define MEM_SIZE			(WIN_Y * WIN_X)
 # define MAX_SOURCE_SIZE	(0x100000)
@@ -80,6 +79,7 @@ typedef struct			s_data
 	double				move_y;
 	int					max_iteration;
 	t_bool				auto_zoom;
+	unsigned int		auto_zoom_ticks;
 	struct s_fract		*fract;
 	struct s_opencl		*opencl;
 }						t_data;

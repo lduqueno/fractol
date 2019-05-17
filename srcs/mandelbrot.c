@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 18:15:55 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/15 20:31:49 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/17 13:32:48 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,12 @@ int				execute_mandelbrot(t_data *data, int y, int x)
 	complex.i = 0;
 	tmp_pow.r = complex.r * complex.r;
 	tmp_pow.i = complex.i * complex.i;
-	while (iteration < data->max_iteration)
+	while (iteration < data->max_iteration && tmp_pow.r + tmp_pow.i < 4)
 	{
 		complex.i = 2 * complex.r * complex.i + constants.i;
 		complex.r = tmp_pow.r - tmp_pow.i + constants.r;
 		tmp_pow.r = complex.r * complex.r;
 		tmp_pow.i = complex.i * complex.i;
-		if (tmp_pow.r + tmp_pow.i >= 4)
-			break ;
 		iteration++;
 	}
 	return (iteration);
