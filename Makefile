@@ -47,7 +47,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS_DIR) $(OBJS)
 	@echo "\n\033[0;33mCompiling final project.. \033[0;32mSuccess!\033m\017"
-	$(CC) $(CFLAGS) $(MLX_FLAGS) -o $(NAME) $(LIBFT_DIR)/libft.a $(OBJS) -I $(LIBFT_DIR)
+	$(CC) $(CFLAGS) $(MLX_FLAGS) -o $(NAME) $(LIBFT_DIR)/libft.a minilibx/libmlx.a $(OBJS)
 	@echo "\033[0;31m------------- [ \033[0;36mEVERYTHING IS OK \033[0;31m] -----------\033m\017\033[0m"
 
 $(OBJS_DIR):
@@ -58,7 +58,7 @@ $(OBJS_DIR):
 	@mkdir $(OBJS_DIR)
 
 $(OBJS_DIR)/%.o:$(SRC_DIR)/%.c
-	$(CC) $(CFLAGS) -o $@ -c $< -I $(HEADER) -I $(LIBFT_DIR)
+	$(CC) $(CFLAGS) -o $@ -c $< -I $(HEADER) -I $(LIBFT_DIR) -I minilibx
 	@echo "\033[0;33mCompiling $<.. \033[0;32mSuccess!\033m\017"
 
 clean:

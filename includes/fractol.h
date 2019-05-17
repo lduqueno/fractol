@@ -19,6 +19,7 @@
 # include <pthread.h>
 # include <stdio.h>
 
+# define CL_SILENCE_DEPRECATION
 # ifdef __APPLE__
 # include <OpenCL/opencl.h>
 # else
