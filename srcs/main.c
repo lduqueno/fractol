@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:00:43 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/18 12:28:12 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/18 18:47:19 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,8 @@ static int		check_args(t_data *data, t_fract *fracts, int ac, char **av)
 	{
 		init_opencl(data);
 		if (data->opencl->double_precision_supported == 0)
-			ft_printf(DOUBLE_PRECISION_WARNING);
+			ft_printf("Double precision is NOT supported on this device.\nThe"
+				"quality of the fractal may decrease a lot.\n");
 	}
 	return (0);
 }
@@ -102,7 +103,7 @@ void			init_default_values(t_data *data)
 	data->zoom = 1;
 	data->move_x = 0;
 	data->move_y = 0;
-	data->max_iteration = 100;
+	data->max_iteration = 75;
 	data->auto_zoom = 0;
 }
 

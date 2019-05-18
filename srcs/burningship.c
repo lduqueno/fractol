@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 17:40:20 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/17 15:52:38 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/18 18:05:30 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ int				execute_burningship(t_data *data, int y, int x)
 	iteration = 0;
 	complex.r = 1.5 * (x - WIN_X / 2) / (0.45 * data->zoom * WIN_X)
 		+ data->move_x - 0.4;
-	complex.i = (y - WIN_Y / 2) / (0.5 * data->zoom * WIN_Y) + data->move_y - 0.3;
+	complex.i = (y - WIN_Y / 2) / (0.5 * data->zoom * WIN_Y) + data->move_y
+		- 0.3;
 	constants.r = complex.r;
 	constants.i = complex.i;
 	tmp_pow.r = complex.r * complex.r;

@@ -6,12 +6,13 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 17:48:36 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/18 12:29:16 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/18 18:48:14 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 #include "keys.h"
+#include "float.h"
 
 int			input_red_cross(int keycode, t_data *data)
 {
@@ -29,52 +30,62 @@ int			input_mouse_move(int x, int y, t_data *data)
 
 int			input_loop(t_data *data)
 {
-	if (data->auto_zoom && data->zoom < MAX_ZOOM)
+	double	increase;
+
+	increase = 0.03 * data->zoom;
+	if (data->auto_zoom && data->zoom + increase < FLT_MAX)
 	{
-		data->zoom += 0.03 * data->zoom;
-		data->max_iteration += 2;
+		data->zoom += increase;
 		draw_image(data);
 	}
 	return (1);
 }
 
-int			input_mouse_press(int button, int x, int y, t_data *data)
+int			input_mouse_press(int btn, int x, int y, t_data *data)
 {
+	double	increase;
+
+	increase = 0.05 * data->zoom;
+	if (btn == 5 && data->zoom > 0.2)
+	{
+		data->auto_zoom = FALSE;
+		data->zoom -= increase;
+		draw_image(data);
+	}
+	else if (btn == 4 && data->zoom + increase < FLT_MAX)
+	{
+		data->auto_zoom = FALSE;
+		data->zoom += increase;
+		draw_image(data);
+	}
 	(void)x;
 	(void)y;
-	if (button == 5 && data->zoom > 0.2)
-	{
-		data->auto_zoom = FALSE;
-		data->zoom -= 0.05 * data->zoom;
-		data->max_iteration -= 2;
-		draw_image(data);
-	}
-	else if (button == 4 && data->zoom < MAX_ZOOM)
-	{
-		data->auto_zoom = FALSE;
-		data->zoom += 0.03 * data->zoom;
-		data->max_iteration += 2;
-		draw_image(data);
-	}
 	return (1);
 }
 
 int			input_keyboard(int keycode, t_data *data)
 {
+	double	increase;
+
+	increase = 0.05 / data->zoom;
 	if (keycode == KEY_ESCAPE)
 		return (exit_fractol(data, TRUE));
 	else if (keycode == KEY_SPACEBAR)
 		data->auto_zoom = !data->auto_zoom;
-	else if (keycode == KEY_UP)
-		data->move_y -= 0.05 / data->zoom;
-	else if (keycode == KEY_DOWN)
-		data->move_y += 0.05 / data->zoom;
-	else if (keycode == KEY_LEFT)
-		data->move_x -= 0.05 / data->zoom;
-	else if (keycode == KEY_RIGHT)
-		data->move_x += 0.05 / data->zoom;
+	else if (keycode == KEY_W && data->move_y - increase > -FLT_MAX)
+		data->move_y -= increase;
+	else if (keycode == KEY_S && data->move_y + increase < FLT_MAX)
+		data->move_y += increase;
+	else if (keycode == KEY_A && data->move_x - increase > -FLT_MAX)
+		data->move_x -= increase;
+	else if (keycode == KEY_D && data->move_x + increase < FLT_MAX)
+		data->move_x += increase;
 	else if (keycode == KEY_R)
 		init_default_values(data);
+	else if (keycode == KEY_UP)
+		data->max_iteration += 2;
+	else if (keycode == KEY_DOWN)
+		data->max_iteration -= 2;
 	else
 		return (1);
 	draw_image(data);

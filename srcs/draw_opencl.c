@@ -6,13 +6,13 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:00:43 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/18 11:48:49 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/18 18:45:09 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static void			print_log(t_data *data)
+static void			print_error_log(t_data *data)
 {
 	char		*buff_erro;
 	cl_int		ret;
@@ -34,7 +34,7 @@ static void			print_log(t_data *data)
 	error(data, OPENCL_LOG_ERROR);
 }
 
-static void			create_opencl_context(t_data *data)
+static void			init_opencl_next(t_data *data)
 {
 	t_opencl	*cl;
 	cl_int		ret;
@@ -48,40 +48,67 @@ static void			create_opencl_context(t_data *data)
 		(const char **)&cl->source_str, (const size_t *)&cl->source_size, &ret);
 	ret = clBuildProgram(cl->program, 1, &cl->device_id, NULL, NULL, NULL);
 	if (ret != CL_SUCCESS)
-	{
-		print_log(data);
-		error(data, OPENCL_ERROR);
-	}
+		print_error_log(data);
 	if (!(function_name = ft_strjoin(data->fract->name,
 			cl->double_precision_supported ? "_double" : "_float")))
 		error(data, MALLOC_ERROR);
 	cl->kernel = clCreateKernel(cl->program, function_name, &ret);
 	free(function_name);
+	data->opencl->colors_buffer = clCreateBuffer(data->opencl->context,
+		CL_MEM_READ_ONLY, sizeof(int) * COLORS_COUNT, NULL, NULL);
+	clEnqueueWriteBuffer(data->opencl->command_queue,
+		data->opencl->colors_buffer, CL_TRUE, 0, sizeof(int) * COLORS_COUNT,
+		get_colors(), 0, NULL, NULL);
+	data->opencl->pixels_buffer = clCreateBuffer(data->opencl->context,
+		CL_MEM_READ_WRITE, WIN_X * WIN_Y * sizeof(int), NULL, NULL);
 }
 
-static cl_mem		get_data_arg(t_data *data)
+static void			set_float_args(t_data *data)
 {
-	float		float_data[DATA_COUNT] = { WIN_Y, WIN_X, data->max_iteration,
-		data->zoom, data->move_x, data->move_y, COLORS_COUNT };
-	double		double_data[DATA_COUNT] = { WIN_Y, WIN_X, data->max_iteration,
-		data->zoom, data->move_x, data->move_y, COLORS_COUNT };
-	cl_mem		result;
+	float			float_zoom;
+	float			float_move_x;
+	float			float_move_y;
 
 	if (data->opencl->double_precision_supported == 0)
 	{
-		result = clCreateBuffer(data->opencl->context, CL_MEM_READ_ONLY,
-			sizeof(float) * DATA_COUNT, NULL, NULL);
-		clEnqueueWriteBuffer(data->opencl->command_queue, result, CL_TRUE, 0,
-			sizeof(float) * DATA_COUNT, float_data, 0, NULL, NULL);
+		float_zoom = (float)data->zoom;
+		float_move_x = (float)data->move_x;
+		float_move_y = (float)data->move_y;
+		clSetKernelArg(data->opencl->kernel, 4, sizeof(float), &float_zoom);
+		clSetKernelArg(data->opencl->kernel, 5, sizeof(float), &float_move_x);
+		clSetKernelArg(data->opencl->kernel, 6, sizeof(float), &float_move_y);
 	}
 	else
 	{
-		result = clCreateBuffer(data->opencl->context, CL_MEM_READ_ONLY,
-			sizeof(double) * DATA_COUNT, NULL, NULL);
-		clEnqueueWriteBuffer(data->opencl->command_queue, result, CL_TRUE, 0,
-			sizeof(double) * DATA_COUNT, double_data, 0, NULL, NULL);
+		clSetKernelArg(data->opencl->kernel, 4, sizeof(double), &data->zoom);
+		clSetKernelArg(data->opencl->kernel, 5, sizeof(double), &data->move_x);
+		clSetKernelArg(data->opencl->kernel, 6, sizeof(double), &data->move_y);
 	}
-	return (result);
+}
+
+void				draw_image_opencl(t_data *data)
+{
+	int			colors_count;
+	size_t		dimensions[2];
+
+	colors_count = COLORS_COUNT;
+	dimensions[0] = WIN_X;
+	dimensions[1] = WIN_Y;
+	clSetKernelArg(data->opencl->kernel, 0, sizeof(cl_mem),
+		&data->opencl->pixels_buffer);
+	clSetKernelArg(data->opencl->kernel, 1, sizeof(int), &dimensions[0]);
+	clSetKernelArg(data->opencl->kernel, 2, sizeof(int), &dimensions[1]);
+	clSetKernelArg(data->opencl->kernel, 3, sizeof(int), &data->max_iteration);
+	set_float_args(data);
+	clSetKernelArg(data->opencl->kernel, 7, sizeof(int), &colors_count);
+	clSetKernelArg(data->opencl->kernel, 8, sizeof(cl_mem),
+		&data->opencl->colors_buffer);
+	clEnqueueNDRangeKernel(data->opencl->command_queue, data->opencl->kernel,
+		2, NULL, dimensions, NULL, 0, NULL, NULL);
+	clFinish(data->opencl->command_queue);
+	clEnqueueReadBuffer(data->opencl->command_queue,
+		data->opencl->pixels_buffer, CL_TRUE, 0, WIN_X * WIN_Y * sizeof(int),
+		data->pixels, 0, NULL, NULL);
 }
 
 void				init_opencl(t_data *data)
@@ -100,42 +127,15 @@ void				init_opencl(t_data *data)
 	if (!(file_name = ft_strjoin("opencl/",
 			cl->double_precision_supported ? "double/" : "float/"))
 			|| !(file_name = ft_strjoin_free(file_name, data->fract->name))
-			|| !(file_name = ft_strjoin_free(file_name, ".cl")))
+			|| !(file_name = ft_strjoin_free(file_name, ".cl"))
+			|| !(cl->source_str = ft_strnew(MAX_SOURCE_SIZE)))
 		error(data, MALLOC_ERROR);
 	if ((fd = open(file_name, O_RDONLY)) < 0)
 		error(data, OPEN_ERROR);
-	if (!(cl->source_str = ft_strnew(MAX_SOURCE_SIZE)))
-		error(data, MALLOC_ERROR);
+	free(file_name);
 	if ((cl->source_size = read(fd, cl->source_str, MAX_SOURCE_SIZE)) <= 0)
 		error(data, READ_ERROR);
 	close(fd);
 	data->opencl = cl;
-}
-
-void				draw_image_opencl(t_data *data)
-{
-	size_t		dimensions[2] = { WIN_X, WIN_Y };
-	cl_mem		pixels;
-	cl_mem		input_data;
-	cl_mem		colors_data;
-
-	create_opencl_context(data);
-	pixels = clCreateBuffer(data->opencl->context, CL_MEM_READ_WRITE,
-		MEM_SIZE * sizeof(int), NULL, NULL);
-	input_data = get_data_arg(data);
-	colors_data = clCreateBuffer(data->opencl->context, CL_MEM_READ_ONLY,
-		sizeof(int) * COLORS_COUNT, NULL, NULL);
-	clEnqueueWriteBuffer(data->opencl->command_queue, colors_data, CL_TRUE, 0,
-		sizeof(int) * COLORS_COUNT, get_colors(), 0, NULL, NULL);
-	clSetKernelArg(data->opencl->kernel, 0, sizeof(cl_mem), &pixels);
-	clSetKernelArg(data->opencl->kernel, 1, sizeof(cl_mem), &input_data);
-	clSetKernelArg(data->opencl->kernel, 2, sizeof(cl_mem), &colors_data);
-	clEnqueueNDRangeKernel(data->opencl->command_queue, data->opencl->kernel,
-		2, NULL, dimensions, NULL, 0, NULL, NULL);
-	clEnqueueReadBuffer(data->opencl->command_queue, pixels,
-		CL_TRUE, 0, MEM_SIZE * sizeof(int), data->pixels, 0, NULL, NULL);
-	clReleaseMemObject(pixels);
-	clReleaseMemObject(input_data);
-	clReleaseMemObject(colors_data);
-	close_opencl(data->opencl);
+	init_opencl_next(data);
 }

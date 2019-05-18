@@ -1,19 +1,15 @@
-__kernel void mandelbrot_float(__global int* pixels, __global float *data, __global int *colors)
+__kernel void mandelbrot_float(__global int* pixels, int win_height,
+			int win_width, int max_iteration, float zoom, float move_x,
+			float move_y, int color_count, __global int *colors)
 {
 	int iteration = 0;
 	int x = get_global_id(0);
 	int y = get_global_id(1);
-	int win_height = data[0];
-	int win_width = data[1];
-	int max_iteration = data[2];
-	float zoom = data[3];
-	float move_x = data[4];
-	float move_y = data[5];
-	int color_count = data[6];
 	float cRe = 0;
 	float cIm = 0;
 	float constantRe = 1.0 * (x - win_width / 2) / (0.5 * zoom * win_width) + move_x - 0.4;
 	float constantIm = (y - win_height / 2) / (0.5 * zoom * win_height) + move_y;
+	
 	float powRe = cRe * cRe;
 	float powIm = cIm * cIm;
 

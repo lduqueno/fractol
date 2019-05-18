@@ -6,14 +6,14 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:00:43 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/17 15:49:54 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/18 18:05:43 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 #include "mlx.h"
 
-int			*get_colors(void)
+int				*get_colors(void)
 {
 	static int	colors[COLORS_COUNT];
 
@@ -39,14 +39,14 @@ int			*get_colors(void)
 	return (colors);
 }
 
-int			color_from_iteration(int iteration, int max_iteration)
+int				color_from_iteration(int iteration, int max_iteration)
 {
 	if (iteration == max_iteration)
 		return (0x000000);
 	return (get_colors()[iteration % COLORS_COUNT]);
 }
 
-static void			draw_text(t_data *data)
+static void		draw_text(t_data *data)
 {
 	char	text[20];
 
@@ -60,7 +60,7 @@ static void			draw_text(t_data *data)
 		0xFFFFFF, text);
 }
 
-void				draw_image(t_data *data)
+void			draw_image(t_data *data)
 {
 	if (data->opencl == NULL)
 		draw_image_thread(data);
