@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 18:14:22 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/17 15:52:46 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/18 19:55:37 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int				execute_julia(t_data *data, int y, int x)
 	iteration = 0;
 	complex.r = 1.5 * (x - WIN_X / 2) / (0.5 * data->zoom * WIN_X)
 		+ data->move_x;
-	complex.i = (y - WIN_Y / 2) / (0.5 * data->zoom * WIN_Y) + data->move_y;
+	complex.i = 1.5 * (y - WIN_Y / 2) / (0.5 * data->zoom * WIN_Y)
+		+ data->move_y;
 	tmp_pow.r = complex.r * complex.r;
 	tmp_pow.i = complex.i * complex.i;
 	while (iteration < data->max_iteration && tmp_pow.r + tmp_pow.i < 4)

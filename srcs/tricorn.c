@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 18:15:55 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/17 15:53:02 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/18 19:55:20 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,10 @@ int				execute_tricorn(t_data *data, int y, int x)
 	t_complex		constants;
 
 	iteration = 0;
-	constants.r = 1.0 * (x - WIN_X / 2) / (0.4 * data->zoom * WIN_X)
-		+ data->move_x - 0.2;
-	constants.i = (y - WIN_Y / 2) / (0.5 * data->zoom * WIN_Y) + data->move_y;
+	constants.r = 3 * ((x - WIN_X / 2) / (0.8 * data->zoom * WIN_X)
+		+ data->move_x) - 0.025;
+	constants.i = 3 * (y - WIN_Y / 2) / (0.8 * data->zoom * WIN_Y)
+		+ data->move_y;
 	complex.r = 0;
 	complex.i = 0;
 	tmp_pow.r = complex.r * complex.r;

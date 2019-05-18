@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:00:43 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/18 18:47:19 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/18 19:55:30 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,6 @@ static void		init_mlx(t_data *data)
 {
 	int		avoid;
 
-	data->mlx_ptr = NULL;
-	data->win_ptr = NULL;
-	data->img_ptr = NULL;
-	data->pixels = NULL;
 	if (!(data->win_title = ft_strjoin("Fractol - ", data->fract->name)))
 		error(data, MALLOC_ERROR);
 	if (!(data->mlx_ptr = mlx_init()))
@@ -122,6 +118,11 @@ int				main(int ac, char **av)
 	init_default_values(&data);
 	data.opencl = NULL;
 	data.fract = NULL;
+	data.win_title = NULL;
+	data.mlx_ptr = NULL;
+	data.win_ptr = NULL;
+	data.img_ptr = NULL;
+	data.pixels = NULL;
 	if (check_args(&data, fracts, ac, av))
 		return (EXIT_FAILURE);
 	init_mlx(&data);

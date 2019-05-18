@@ -8,7 +8,7 @@ __kernel void julia_double(__global int* pixels, int win_height,
 	int x = get_global_id(0);
 	int y = get_global_id(1);
 	double cRe = 1.5 * (x - win_width / 2) / (0.5 * zoom * win_width) + move_x;
-	double cIm = (y - win_height / 2) / (0.5 * zoom * win_height) + move_y;
+	double cIm = 1.5 * (y - win_height / 2) / (0.5 * zoom * win_height) + move_y;
 	double powRe = cRe * cRe;
 	double powIm = cIm * cIm;
 

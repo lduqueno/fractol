@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:00:43 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/18 18:45:09 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/18 19:53:11 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,8 @@ static void			print_error_log(t_data *data)
 		CL_PROGRAM_BUILD_LOG, build_log_len, buff_erro, NULL);
 	if (ret)
 		error(data, OPENCL_LOG_ERROR);
-	ft_dprintf(STDERR_FILENO, "Unable to compile .cl file!");
 	ft_dprintf(STDERR_FILENO, "Build log: \n%s\n", buff_erro);
-	free(buff_erro);
-	error(data, OPENCL_LOG_ERROR);
+	error(data, OPENCL_ERROR);
 }
 
 static void			init_opencl_next(t_data *data)

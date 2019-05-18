@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 16:15:33 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/18 18:05:48 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/18 19:54:24 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,11 @@ void		free_all(t_data *data)
 	if (data->win_ptr)
 		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 	ft_strdel(&data->win_title);
-	free(data->mlx_ptr);
+	if (data->mlx_ptr)
+		free(data->mlx_ptr);
 	if (data->opencl)
 	{
-		free(data->opencl->source_str);
+		ft_strdel(&data->opencl->source_str);
 		free(data->opencl);
 	}
 }

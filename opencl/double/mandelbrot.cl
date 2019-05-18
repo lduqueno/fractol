@@ -9,9 +9,9 @@ __kernel void mandelbrot_double(__global int* pixels, int win_height,
 	int y = get_global_id(1);
 	double cRe = 0;
 	double cIm = 0;
-	double constantRe = 1.0 * (x - win_width / 2) / (0.5 * zoom * win_width) + move_x - 0.4;
-	double constantIm = (y - win_height / 2) / (0.5 * zoom * win_height) + move_y;
-	
+	double constantRe = (x - win_width / 2) / (0.38 * zoom * win_width) + move_x - 0.5;
+	double constantIm = (y - win_height / 2) / (0.38 * zoom * win_height) + move_y;
+
 	double powRe = cRe * cRe;
 	double powIm = cIm * cIm;
 

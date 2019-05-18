@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:01:17 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/18 18:47:57 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/18 19:44:41 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef char				t_bool;
 # define MAX_SOURCE_SIZE	0x100000
 # define DATA_COUNT			7
 # define COLORS_COUNT		16
+# define MAX_ZOOM			17733711455678103904.0
 
 # define MALLOC_ERROR		"Unable to allocate memory"
 # define MLX_ERROR			"Unable to load the MLX"

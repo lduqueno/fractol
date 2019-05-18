@@ -6,7 +6,7 @@ __kernel void julia_float(__global int* pixels, int win_height,
 	int x = get_global_id(0);
 	int y = get_global_id(1);
 	float cRe = 1.5 * (x - win_width / 2) / (0.5 * zoom * win_width) + move_x;
-	float cIm = (y - win_height / 2) / (0.5 * zoom * win_height) + move_y;
+	float cIm = 1.5 * (y - win_height / 2) / (0.5 * zoom * win_height) + move_y;
 	float powRe = cRe * cRe;
 	float powIm = cIm * cIm;
 

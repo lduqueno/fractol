@@ -6,7 +6,7 @@ __kernel void burningship_float(__global int* pixels, int win_height,
 	int x = get_global_id(0);
 	int y = get_global_id(1);
 	float cRe = 1.5 * (x - win_width / 2) / (0.45 * zoom * win_width) + move_x - 0.4;
-	float cIm = (y - win_height / 2) / (0.5 * zoom * win_height) + move_y - 0.3;
+	float cIm = 1.5 * (y - win_height / 2) / (0.45 * zoom * win_height) + move_y - 0.5;
 	float constantsRe = cRe;
 	float constantsIm = cIm;
 
