@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:00:43 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/17 15:50:29 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/18 12:28:12 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int		print_usage(t_fract *fractals)
 	int		i;
 
 	i = 0;
-	ft_printf("Fractol usage : ./fractol (-opencl) <fractal>\nAvailable"
+	ft_printf("Fractol usage : ./fractol (-opencl) <fractal>\nAvailable "
 		"fractals : ");
 	while (i < FRACTAL_COUNT)
 	{
@@ -36,8 +36,8 @@ static int		print_usage(t_fract *fractals)
 }
 
 /*
-**	Init our main struct t_data
-**	(setting all pointers to NULL, creating window, hooking inputs..)
+**	Init the minilibx window
+**	(setting all pointers, creating window, hooking inputs..)
 */
 
 static void		init_mlx(t_data *data)
@@ -48,7 +48,6 @@ static void		init_mlx(t_data *data)
 	data->win_ptr = NULL;
 	data->img_ptr = NULL;
 	data->pixels = NULL;
-	data->opencl = NULL;
 	if (!(data->win_title = ft_strjoin("Fractol - ", data->fract->name)))
 		error(data, MALLOC_ERROR);
 	if (!(data->mlx_ptr = mlx_init()))
@@ -63,28 +62,68 @@ static void		init_mlx(t_data *data)
 		error(data, MLX_ERROR);
 }
 
-static void		init_default_values(t_data *data)
+/*
+**	Parse and verify args (find fract name and draw mode)
+*/
+
+static int		check_args(t_data *data, t_fract *fracts, int ac, char **av)
+{
+	int			i;
+	t_fract		*found;
+	t_bool		use_opencl;
+
+	i = 0;
+	found = NULL;
+	use_opencl = FALSE;
+	while (++i < ac)
+		if (ft_strequ(av[i], "-opencl") && !use_opencl)
+			use_opencl = TRUE;
+		else if (found || !(found = get_fractal_by_name(fracts, av[i])))
+			return (print_usage(fracts));
+	if (found)
+		data->fract = found;
+	else
+		return (print_usage(fracts));
+	if (use_opencl)
+	{
+		init_opencl(data);
+		if (data->opencl->double_precision_supported == 0)
+			ft_printf(DOUBLE_PRECISION_WARNING);
+	}
+	return (0);
+}
+
+/*
+**	Settings all values to default
+*/
+
+void			init_default_values(t_data *data)
 {
 	data->zoom = 1;
 	data->move_x = 0;
 	data->move_y = 0;
 	data->max_iteration = 100;
 	data->auto_zoom = 0;
-	data->auto_zoom_ticks = 0;
 }
+
+/*
+**	Main function - start of the program
+*/
 
 int				main(int ac, char **av)
 {
 	t_data		data;
-	t_fract		*fractals;
+	t_fract		*fracts;
 
-	fractals = init_fractals();
-	if (/*ac != 2 || */!(data.fract = get_fractal_by_name(fractals, av[1])))
-		return (print_usage(fractals));
-	init_mlx(&data);
+	fracts = init_fractals();
+	if (ac < 2 || ac > 3)
+		return (print_usage(fracts));
 	init_default_values(&data);
-	if (ac == 3 && ft_strequ(av[2], "-opencl"))
-		init_opencl(&data);
+	data.opencl = NULL;
+	data.fract = NULL;
+	if (check_args(&data, fracts, ac, av))
+		return (EXIT_FAILURE);
+	init_mlx(&data);
 	draw_image(&data);
 	mlx_hook(data.win_ptr, 17, 0, input_red_cross, &data);
 	mlx_hook(data.win_ptr, 6, 0, input_mouse_move, &data);

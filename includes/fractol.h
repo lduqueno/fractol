@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:01:17 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/17 17:09:33 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/18 12:28:41 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,10 @@ typedef char				t_bool;
 # define OPEN_ERROR			"Unable to open opencl file"
 # define READ_ERROR			"Unable to read opencl file"
 # define OPENCL_ERROR		"Unable to compute opencl file"
+# define OPENCL_LOG_ERROR	"Unable to build opencl log"
+
+# define DOUBLE_PRECISION_WARNING "Double precision is NOT supported on"\
+	" this device.\nThe quality of the fractal may decrease a lot.\n"
 
 typedef struct			s_opencl
 {
@@ -80,7 +84,6 @@ typedef struct			s_data
 	double				move_y;
 	unsigned int		max_iteration;
 	t_bool				auto_zoom;
-	unsigned int		auto_zoom_ticks;
 	struct s_fract		*fract;
 	struct s_opencl		*opencl;
 }						t_data;
@@ -102,6 +105,8 @@ typedef struct			s_split_context
 	int					end_x;
 }						t_context;
 
+void				init_default_values(t_data *data);
+
 int					exit_fractol(t_data *data, t_bool free);
 int					error(t_data *data, char *error_msg);
 void				free_all(t_data *data);
@@ -122,10 +127,12 @@ int					input_loop(t_data *data);
 
 int					*get_colors(void);
 int					color_from_iteration(int iteration, int max_iteration);
+
 void				draw_image(t_data *data);
 void				draw_image_thread(t_data *data);
+
 void				draw_image_opencl(t_data *data);
 void				init_opencl(t_data *data);
-void				close_opencl(t_opencl *cl, t_bool free_program);
+void				close_opencl(t_opencl *cl);
 
 #endif

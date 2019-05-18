@@ -6,42 +6,32 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:00:43 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/17 17:07:35 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/18 11:48:49 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static void			print_log(t_opencl *cl)
+static void			print_log(t_data *data)
 {
 	char		*buff_erro;
-	cl_int		errcode;
+	cl_int		ret;
 	size_t		build_log_len;
 
-	errcode = clGetProgramBuildInfo(cl->program, cl->device_id,
+	ret = clGetProgramBuildInfo(data->opencl->program, data->opencl->device_id,
 		CL_PROGRAM_BUILD_LOG, 0, NULL, &build_log_len);
-	if (errcode)
-	{
-		printf("clGetProgramBuildInfo failed at line %d\n", __LINE__);
-		exit(-1);
-	}
-	buff_erro = malloc(build_log_len);
-	if (!buff_erro)
-	{
-		printf("malloc failed at line %d\n", __LINE__);
-		exit(-2);
-	}
-	errcode = clGetProgramBuildInfo(cl->program, cl->device_id,
+	if (ret)
+		error(data, OPENCL_LOG_ERROR);
+	if (!(buff_erro = (char *)malloc(sizeof(char) * build_log_len)))
+		error(data, MALLOC_ERROR);
+	ret = clGetProgramBuildInfo(data->opencl->program, data->opencl->device_id,
 		CL_PROGRAM_BUILD_LOG, build_log_len, buff_erro, NULL);
-	if (errcode)
-	{
-		printf("clGetProgramBuildInfo failed at line %d\n", __LINE__);
-		exit(-3);
-	}
-	fprintf(stderr,"Build log: \n%s\n", buff_erro);
+	if (ret)
+		error(data, OPENCL_LOG_ERROR);
+	ft_dprintf(STDERR_FILENO, "Unable to compile .cl file!");
+	ft_dprintf(STDERR_FILENO, "Build log: \n%s\n", buff_erro);
 	free(buff_erro);
-	fprintf(stderr,"clBuildProgram failed\n");
-	exit(EXIT_FAILURE);
+	error(data, OPENCL_LOG_ERROR);
 }
 
 static void			create_opencl_context(t_data *data)
@@ -59,7 +49,7 @@ static void			create_opencl_context(t_data *data)
 	ret = clBuildProgram(cl->program, 1, &cl->device_id, NULL, NULL, NULL);
 	if (ret != CL_SUCCESS)
 	{
-		print_log(cl);
+		print_log(data);
 		error(data, OPENCL_ERROR);
 	}
 	if (!(function_name = ft_strjoin(data->fract->name,
@@ -147,17 +137,5 @@ void				draw_image_opencl(t_data *data)
 	clReleaseMemObject(pixels);
 	clReleaseMemObject(input_data);
 	clReleaseMemObject(colors_data);
-	close_opencl(data->opencl, FALSE);
-}
-
-void				close_opencl(t_opencl *cl, t_bool free_program)
-{
-	clFlush(cl->command_queue);
-	clFinish(cl->command_queue);
-	clReleaseKernel(cl->kernel);
-	clReleaseProgram(cl->program);
-	clReleaseCommandQueue(cl->command_queue);
-	clReleaseContext(cl->context);
-	if (free_program)
-		free(cl->source_str);
+	close_opencl(data->opencl);
 }

@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 17:48:36 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/17 15:19:25 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/18 12:29:16 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,8 @@ int			input_loop(t_data *data)
 {
 	if (data->auto_zoom && data->zoom < MAX_ZOOM)
 	{
-		data->zoom += 0.01 * data->zoom;
-		if (++data->auto_zoom_ticks % 20 == 0)
-			data->max_iteration += 2;
+		data->zoom += 0.03 * data->zoom;
+		data->max_iteration += 2;
 		draw_image(data);
 	}
 	return (1);
@@ -53,7 +52,7 @@ int			input_mouse_press(int button, int x, int y, t_data *data)
 	else if (button == 4 && data->zoom < MAX_ZOOM)
 	{
 		data->auto_zoom = FALSE;
-		data->zoom += 0.05 * data->zoom;
+		data->zoom += 0.03 * data->zoom;
 		data->max_iteration += 2;
 		draw_image(data);
 	}
@@ -74,6 +73,8 @@ int			input_keyboard(int keycode, t_data *data)
 		data->move_x -= 0.05 / data->zoom;
 	else if (keycode == KEY_RIGHT)
 		data->move_x += 0.05 / data->zoom;
+	else if (keycode == KEY_R)
+		init_default_values(data);
 	else
 		return (1);
 	draw_image(data);
