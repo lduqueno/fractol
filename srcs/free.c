@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 16:15:33 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/18 19:54:24 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/19 17:59:55 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void		free_all(t_data *data)
 {
 	if (data->img_ptr)
 		mlx_destroy_image(data->mlx_ptr, data->img_ptr);
+	if (data->menu_ptr)
+		mlx_destroy_image(data->mlx_ptr, data->menu_ptr);
 	if (data->win_ptr)
 		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 	ft_strdel(&data->win_title);
@@ -27,6 +29,7 @@ void		free_all(t_data *data)
 		ft_strdel(&data->opencl->source_str);
 		free(data->opencl);
 	}
+	set_pointers_to_null(data);
 }
 
 void		close_opencl(t_opencl *cl)

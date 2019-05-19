@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:01:17 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/18 19:44:41 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/19 17:59:41 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef char				t_bool;
 
 # define WIN_X				800
 # define WIN_Y				800
+# define MENU_X				WIN_X / 3
 
 # define THREAD_COUNT		6
 
@@ -40,12 +41,14 @@ typedef char				t_bool;
 # define COLORS_COUNT		16
 # define MAX_ZOOM			17733711455678103904.0
 
+# define WINDOW_SMALL_ERROR	"The window is too small (minimum is 720x720)"
 # define MALLOC_ERROR		"Unable to allocate memory"
 # define MLX_ERROR			"Unable to load the MLX"
 # define OPEN_ERROR			"Unable to open opencl file"
 # define READ_ERROR			"Unable to read opencl file"
 # define OPENCL_ERROR		"Unable to compute opencl file"
 # define OPENCL_LOG_ERROR	"Unable to build opencl log"
+# define LOAD_IMG_ERROR		"Unable to load color wheel image"
 
 typedef struct			s_opencl
 {
@@ -76,12 +79,18 @@ typedef struct			s_data
 	void				*win_ptr;
 	char				*win_title;
 	void				*img_ptr;
+	void				*menu_ptr;
 	unsigned int		*pixels;
+	unsigned int		*menu_pixels;
+	unsigned int		color_value;
+	int					wheel_width;
+	int					wheel_height;
 	double				zoom;
 	double				move_x;
 	double				move_y;
 	unsigned int		max_iteration;
 	t_bool				auto_zoom;
+	t_bool				left_clicking;
 	struct s_fract		*fract;
 	struct s_opencl		*opencl;
 }						t_data;
@@ -103,6 +112,7 @@ typedef struct			s_split_context
 	int					end_x;
 }						t_context;
 
+void 					set_pointers_to_null(t_data *data);
 void					init_default_values(t_data *data);
 
 int						exit_fractol(t_data *data, t_bool free);
@@ -120,14 +130,20 @@ int						execute_tricorn(t_data *data, int y, int x);
 int						input_red_cross(int key, t_data *data);
 int						input_mouse_move(int x, int y, t_data *data);
 int						input_mouse_press(int btn, int x, int y, t_data *data);
+int						input_mouse_release(int btn, int x, int y, t_data *data);
 int						input_keyboard(int keycode, t_data *data);
 int						input_loop(t_data *data);
 
 int						*get_colors(void);
 int						color_from_iteration(int iteration, int max_iteration);
+t_bool					change_color_by_mouse(t_data *data, int y, int x);
 
 void					draw_image(t_data *data);
 void					draw_image_thread(t_data *data);
+
+void					draw_str_centered(t_data *data, int x, int y, char *s);
+void					draw_variables(t_data *data);
+void					draw_menu(t_data *data);
 
 void					draw_image_opencl(t_data *data);
 void					init_opencl(t_data *data);

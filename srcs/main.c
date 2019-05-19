@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:00:43 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/18 19:55:30 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/19 18:02:13 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void		init_mlx(t_data *data)
 		error(data, MALLOC_ERROR);
 	if (!(data->mlx_ptr = mlx_init()))
 		error(data, MLX_ERROR);
-	if (!(data->win_ptr = mlx_new_window(data->mlx_ptr, WIN_X, WIN_Y,
+	if (!(data->win_ptr = mlx_new_window(data->mlx_ptr, WIN_X + MENU_X, WIN_Y,
 			data->win_title)))
 		error(data, MLX_ERROR);
 	if (!(data->img_ptr = mlx_new_image(data->mlx_ptr, WIN_X, WIN_Y)))
@@ -84,23 +84,28 @@ static int		check_args(t_data *data, t_fract *fracts, int ac, char **av)
 	{
 		init_opencl(data);
 		if (data->opencl->double_precision_supported == 0)
-			ft_printf("Double precision is NOT supported on this device.\nThe"
+			ft_printf("Double precision is NOT supported on this device.\nThe "
 				"quality of the fractal may decrease a lot.\n");
 	}
 	return (0);
 }
 
 /*
-**	Settings all values to default
+**	Settings all the pointers to NULL
 */
 
-void			init_default_values(t_data *data)
+void 		set_pointers_to_null(t_data *data)
 {
-	data->zoom = 1;
-	data->move_x = 0;
-	data->move_y = 0;
-	data->max_iteration = 75;
-	data->auto_zoom = 0;
+	data->left_clicking = FALSE;
+	data->opencl = NULL;
+	data->fract = NULL;
+	data->win_title = NULL;
+	data->mlx_ptr = NULL;
+	data->win_ptr = NULL;
+	data->img_ptr = NULL;
+	data->pixels = NULL;
+	data->menu_ptr = NULL;
+	data->menu_pixels = NULL;
 }
 
 /*
@@ -116,20 +121,18 @@ int				main(int ac, char **av)
 	if (ac < 2 || ac > 3)
 		return (print_usage(fracts));
 	init_default_values(&data);
-	data.opencl = NULL;
-	data.fract = NULL;
-	data.win_title = NULL;
-	data.mlx_ptr = NULL;
-	data.win_ptr = NULL;
-	data.img_ptr = NULL;
-	data.pixels = NULL;
+	set_pointers_to_null(&data);
+	if (WIN_X < 720 || WIN_Y < 720)
+		error(&data, WINDOW_SMALL_ERROR);
 	if (check_args(&data, fracts, ac, av))
 		return (EXIT_FAILURE);
 	init_mlx(&data);
+	draw_menu(&data);
 	draw_image(&data);
 	mlx_hook(data.win_ptr, 17, 0, input_red_cross, &data);
 	mlx_hook(data.win_ptr, 6, 0, input_mouse_move, &data);
 	mlx_hook(data.win_ptr, 4, 0, input_mouse_press, &data);
+	mlx_hook(data.win_ptr, 5, 0, input_mouse_release, &data);
 	mlx_hook(data.win_ptr, 2, 0, input_keyboard, &data);
 	mlx_loop_hook(data.mlx_ptr, input_loop, &data);
 	mlx_loop(data.mlx_ptr);

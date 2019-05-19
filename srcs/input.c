@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 17:48:36 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/18 19:45:59 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/19 18:39:46 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,46 +20,16 @@ int			input_red_cross(int keycode, t_data *data)
 	return (exit_fractol(data, FALSE));
 }
 
-int			input_mouse_move(int x, int y, t_data *data)
-{
-	(void)data;
-	if (x < 0 || x > WIN_X || y < 0 || y > WIN_Y)
-		return (0);
-	return (1);
-}
-
 int			input_loop(t_data *data)
 {
 	double	increase;
 
-	increase = 0.03 * data->zoom;
+	increase = 0.01 * data->zoom;
 	if (data->auto_zoom && data->zoom + increase < MAX_ZOOM)
 	{
 		data->zoom += increase;
 		draw_image(data);
 	}
-	return (1);
-}
-
-int			input_mouse_press(int btn, int x, int y, t_data *data)
-{
-	double	increase;
-
-	increase = 0.05 * data->zoom;
-	if (btn == 5 && data->zoom > 0.2)
-	{
-		data->auto_zoom = FALSE;
-		data->zoom -= increase;
-		draw_image(data);
-	}
-	else if (btn == 4 && data->zoom + increase < MAX_ZOOM)
-	{
-		data->auto_zoom = FALSE;
-		data->zoom += increase;
-		draw_image(data);
-	}
-	(void)x;
-	(void)y;
 	return (1);
 }
 

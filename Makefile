@@ -6,7 +6,7 @@
 #    By: rlegan <rlegan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/09/13 16:35:11 by rlegan            #+#    #+#              #
-#    Updated: 2019/05/17 15:24:56 by lduqueno         ###   ########.fr        #
+#    Updated: 2019/05/19 16:37:26 by lduqueno         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,9 +29,11 @@ SRC_FILES = main.c \
 			free.c \
 			fractal.c \
 			input.c \
+			input_mouse.c \
 			draw_thread.c \
 			draw_opencl.c \
 			draw.c \
+			menu.c \
 			julia.c \
 			mandelbrot.c \
 			burningship.c \

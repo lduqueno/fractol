@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:00:43 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/18 19:53:11 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/19 17:47:42 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,10 @@ static void			init_opencl_next(t_data *data)
 		error(data, MALLOC_ERROR);
 	cl->kernel = clCreateKernel(cl->program, function_name, &ret);
 	free(function_name);
-	data->opencl->colors_buffer = clCreateBuffer(data->opencl->context,
-		CL_MEM_READ_ONLY, sizeof(int) * COLORS_COUNT, NULL, NULL);
-	clEnqueueWriteBuffer(data->opencl->command_queue,
-		data->opencl->colors_buffer, CL_TRUE, 0, sizeof(int) * COLORS_COUNT,
-		get_colors(), 0, NULL, NULL);
 	data->opencl->pixels_buffer = clCreateBuffer(data->opencl->context,
 		CL_MEM_READ_WRITE, WIN_X * WIN_Y * sizeof(int), NULL, NULL);
+	data->opencl->colors_buffer = clCreateBuffer(data->opencl->context,
+		CL_MEM_READ_ONLY, sizeof(int) * COLORS_COUNT, NULL, NULL);
 }
 
 static void			set_float_args(t_data *data)
@@ -92,10 +89,13 @@ void				draw_image_opencl(t_data *data)
 	colors_count = COLORS_COUNT;
 	dimensions[0] = WIN_X;
 	dimensions[1] = WIN_Y;
+	clEnqueueWriteBuffer(data->opencl->command_queue,
+		data->opencl->colors_buffer, CL_TRUE, 0, sizeof(int) * COLORS_COUNT,
+		get_colors(), 0, NULL, NULL);
 	clSetKernelArg(data->opencl->kernel, 0, sizeof(cl_mem),
 		&data->opencl->pixels_buffer);
-	clSetKernelArg(data->opencl->kernel, 1, sizeof(int), &dimensions[0]);
-	clSetKernelArg(data->opencl->kernel, 2, sizeof(int), &dimensions[1]);
+	clSetKernelArg(data->opencl->kernel, 1, sizeof(int), &dimensions[1]);
+	clSetKernelArg(data->opencl->kernel, 2, sizeof(int), &dimensions[0]);
 	clSetKernelArg(data->opencl->kernel, 3, sizeof(int), &data->max_iteration);
 	set_float_args(data);
 	clSetKernelArg(data->opencl->kernel, 7, sizeof(int), &colors_count);

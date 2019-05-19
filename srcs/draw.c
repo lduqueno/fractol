@@ -6,18 +6,36 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:00:43 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/18 19:25:47 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/19 18:06:28 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 #include "mlx.h"
 
+/*
+**	Settings all default values
+*/
+
+void			init_default_values(t_data *data)
+{
+	data->color_value = 0xFFFFFF;
+	data->zoom = 1;
+	data->move_x = 0;
+	data->move_y = 0;
+	data->max_iteration = 75;
+	data->auto_zoom = 0;
+}
+
+/*
+**	Get the color shade (and init it the first time)
+*/
+
 int				*get_colors(void)
 {
-	static int	colors[COLORS_COUNT];
+	static int	colors[COLORS_COUNT] = {0};
 
-	if (colors[0] != 0x421E0F)
+	if (!colors[0])
 	{
 		colors[0] = 0x421E0F;
 		colors[1] = 0x19071A;
@@ -39,6 +57,10 @@ int				*get_colors(void)
 	return (colors);
 }
 
+/*
+**	Given an iteration, returns a color
+*/
+
 int				color_from_iteration(int iteration, int max_iteration)
 {
 	if (iteration == max_iteration)
@@ -46,19 +68,26 @@ int				color_from_iteration(int iteration, int max_iteration)
 	return (get_colors()[iteration % COLORS_COUNT]);
 }
 
-static void		draw_text(t_data *data)
-{
-	char	text[35];
+/*
+**	Draw a string centered on the given position
+*/
 
-	ft_bzero(text, 35);
-	ft_sprintf(text, "Iteration : %d\n", data->max_iteration);
-	mlx_string_put(data->mlx_ptr, data->win_ptr, 5, 5,
-		0xFFFFFF, text);
-	ft_bzero(text, 35);
-	ft_sprintf(text, "Zoom : %.2f\n", data->zoom);
-	mlx_string_put(data->mlx_ptr, data->win_ptr, 5, 5 * 5,
-		0xFFFFFF, text);
+void			draw_str_centered(t_data *data, int x, int y, char *s)
+{
+	size_t		len;
+
+	if (!s)
+		return ;
+	len = ft_strlen(s);
+	if (len == 0)
+		return ;
+	mlx_string_put(data->mlx_ptr, data->win_ptr, x - len * 10 / 2,
+		y, 0xFFFFFF, s);
 }
+
+/*
+**	Draw image, using multi-thread or opencl
+*/
 
 void			draw_image(t_data *data)
 {
@@ -67,5 +96,5 @@ void			draw_image(t_data *data)
 	else
 		draw_image_opencl(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
-	draw_text(data);
+	draw_variables(data);
 }
