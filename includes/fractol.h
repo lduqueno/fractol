@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:01:17 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/19 17:59:41 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/19 18:59:02 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef char				t_bool;
 # define WIN_Y				800
 # define MENU_X				WIN_X / 3
 
-# define THREAD_COUNT		6
+# define THREAD_COUNT		12
 
 # define MAX_SOURCE_SIZE	0x100000
 # define DATA_COUNT			7
