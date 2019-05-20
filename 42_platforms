@@ -1,0 +1,8 @@
+
+ 1. Platform 
+  1.1 Name       : Apple
+  1.2 Vendor     : Apple
+  1.3 Version    : OpenCL 1.2 (May 26 2017 12:59:48)
+  1.4 Profile    : FULL_PROFILE
+  1.5 Extensions : cl_APPLE_SetMemObjectDestructor cl_APPLE_ContextLoggingFunctions cl_APPLE_clut cl_APPLE_query_kernel_names cl_APPLE_gl_sharing cl_khr_gl_event
+
