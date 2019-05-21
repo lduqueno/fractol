@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 17:48:36 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/19 18:39:46 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/21 16:54:37 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int			input_loop(t_data *data)
 	if (data->auto_zoom && data->zoom + increase < MAX_ZOOM)
 	{
 		data->zoom += increase;
+		data->move_x += data->mouse_x / data->zoom / 3;
+		data->move_y += data->mouse_y / data->zoom / 3;
 		draw_image(data);
 	}
 	return (1);
@@ -52,12 +54,12 @@ int			input_keyboard(int keycode, t_data *data)
 		data->move_x += increase;
 	else if (keycode == KEY_R)
 		init_default_values(data);
-	else if (keycode == KEY_UP && data->max_iteration < 1500)
-		data->max_iteration += 2;
-	else if (keycode == KEY_DOWN && data->max_iteration > 3)
-		data->max_iteration -= 2;
+	else if (keycode == KEY_L)
+		data->lock_shape = TRUE;
+	else if ((keycode == KEY_UP && data->max_iteration < 1500)
+			|| (keycode == KEY_DOWN && data->max_iteration > 3))
+		data->max_iteration += keycode == KEY_UP ? 2 : -2;
 	else
 		return (1);
-	draw_image(data);
-	return (1);
+	return (draw_image(data));
 }

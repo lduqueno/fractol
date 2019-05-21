@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 16:58:30 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/19 15:42:10 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/21 15:15:54 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 
 static void			*draw_lines_thread(void *arg)
 {
-	t_context	*context;
-	int			y;
-	int			x;
-	int			result;
+	t_split_context	*context;
+	int				y;
+	int				x;
+	int				result;
 
-	context = (t_context *)arg;
+	context = (t_split_context *)arg;
 	y = context->start_y - 1;
 	while (++y < context->end_y)
 	{
@@ -39,7 +39,7 @@ static void			*draw_lines_thread(void *arg)
 
 static void			wait_threads(pthread_t *threads)
 {
-	int			thread_id;
+	int				thread_id;
 
 	thread_id = 0;
 	while (thread_id < THREAD_COUNT)
@@ -51,16 +51,16 @@ static void			wait_threads(pthread_t *threads)
 
 void				draw_image_thread(t_data *data)
 {
-	pthread_t	threads[THREAD_COUNT];
-	t_context	*context;
-	int			thread_id;
-	int			last_line;
+	pthread_t		threads[THREAD_COUNT];
+	t_split_context	*context;
+	int				thread_id;
+	int				last_line;
 
 	thread_id = 0;
 	last_line = 0;
 	while (thread_id < THREAD_COUNT)
 	{
-		if (!(context = (t_context *)malloc(sizeof(t_context))))
+		if (!(context = (t_split_context *)malloc(sizeof(t_split_context))))
 			error(data, MALLOC_ERROR);
 		context->data = data;
 		context->thread_id = thread_id;

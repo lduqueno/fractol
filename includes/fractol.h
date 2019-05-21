@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:01:17 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/21 15:06:13 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/21 16:39:35 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,11 @@ typedef struct			s_data
 	double				zoom;
 	double				move_x;
 	double				move_y;
+	double				mouse_x;
+	double				mouse_y;
 	unsigned int		max_iteration;
 	t_bool				auto_zoom;
+	t_bool				lock_shape;
 	t_bool				left_clicking;
 	struct s_fract		*fract;
 	struct s_opencl		*opencl;
@@ -110,7 +113,7 @@ typedef struct			s_split_context
 	int					start_x;
 	int					end_y;
 	int					end_x;
-}						t_context;
+}						t_split_context;
 
 void					set_pointers_to_null(t_data *data);
 void					init_default_values(t_data *data);
@@ -139,7 +142,7 @@ int						*get_colors(void);
 int						color_from_iteration(int iteration, int max_iteration);
 t_bool					change_color_by_mouse(t_data *data, int y, int x);
 
-void					draw_image(t_data *data);
+int						draw_image(t_data *data);
 void					draw_image_thread(t_data *data);
 
 void					draw_str_centered(t_data *data, int x, int y, char *s);

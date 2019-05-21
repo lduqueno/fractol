@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:00:43 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/19 18:06:28 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/21 16:50:16 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,11 @@ void			init_default_values(t_data *data)
 	data->move_x = 0;
 	data->move_y = 0;
 	data->max_iteration = 75;
-	data->auto_zoom = 0;
+	data->auto_zoom = FALSE;
+	data->left_clicking = FALSE;
+	data->lock_shape = FALSE;
+	data->mouse_x = 0;
+	data->mouse_y = 0;
 }
 
 /*
@@ -89,7 +93,7 @@ void			draw_str_centered(t_data *data, int x, int y, char *s)
 **	Draw image, using multi-thread or opencl
 */
 
-void			draw_image(t_data *data)
+int				draw_image(t_data *data)
 {
 	if (data->opencl == NULL)
 		draw_image_thread(data);
@@ -97,4 +101,5 @@ void			draw_image(t_data *data)
 		draw_image_opencl(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
 	draw_variables(data);
+	return (1);
 }
