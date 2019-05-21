@@ -1,6 +1,6 @@
 #pragma OPENCL EXTENSION cl_khr_fp64 : enable
 
-__kernel void mandelbrot_double(__global int* pixels, int win_height,
+__kernel void mandelbrot(__global int* pixels, int win_height,
 			int win_width, int max_iteration, double zoom, double move_x,
 			double move_y, int color_count, __global int *colors)
 {

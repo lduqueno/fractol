@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:00:43 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/20 18:02:04 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/21 15:04:41 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ static void			init_opencl_next(t_data *data)
 {
 	t_opencl	*cl;
 	cl_int		ret;
-	char		*function_name;
 
 	cl = data->opencl;
 	cl->context = clCreateContext(NULL, 1, &cl->device_id, NULL, NULL, &ret);
@@ -47,11 +46,7 @@ static void			init_opencl_next(t_data *data)
 	ret = clBuildProgram(cl->program, 1, &cl->device_id, NULL, NULL, NULL);
 	if (ret != CL_SUCCESS)
 		print_error_log(data);
-	if (!(function_name = ft_strjoin(data->fract->name,
-			cl->double_precision_supported ? "_double" : "_float")))
-		error(data, MALLOC_ERROR);
-	cl->kernel = clCreateKernel(cl->program, function_name, &ret);
-	free(function_name);
+	cl->kernel = clCreateKernel(cl->program, data->fract->name, &ret);
 	data->opencl->pixels_buffer = clCreateBuffer(data->opencl->context,
 		CL_MEM_READ_WRITE, WIN_X * WIN_Y * sizeof(int), NULL, NULL);
 	data->opencl->colors_buffer = clCreateBuffer(data->opencl->context,
@@ -122,9 +117,7 @@ void				init_opencl(t_data *data)
 		&cl->device_id, &cl->ret_num_devices);
 	clGetDeviceInfo(cl->device_id, CL_DEVICE_NATIVE_VECTOR_WIDTH_DOUBLE,
 		sizeof(cl_uint), &cl->double_precision_supported, NULL);
-	if (!(file_name = ft_strjoin("opencl/",
-			cl->double_precision_supported ? "double/" : "float/"))
-			|| !(file_name = ft_strjoin_free(file_name, data->fract->name))
+	if (!(file_name = ft_strjoin("opencl/", data->fract->name))
 			|| !(file_name = ft_strjoin_free(file_name, ".cl"))
 			|| !(cl->source_str = ft_strnew(MAX_SOURCE_SIZE)))
 		error(data, MALLOC_ERROR);
@@ -133,6 +126,8 @@ void				init_opencl(t_data *data)
 	free(file_name);
 	if ((cl->source_size = read(fd, cl->source_str, MAX_SOURCE_SIZE)) <= 0)
 		error(data, READ_ERROR);
+	if (cl->double_precision_supported == 0)
+		ft_strreplace(cl->source_str, "double", "float");
 	close(fd);
 	data->opencl = cl;
 	init_opencl_next(data);

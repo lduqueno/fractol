@@ -6,7 +6,7 @@
 /*   By: rlegan <rlegan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 12:48:59 by rlegan            #+#    #+#             */
-/*   Updated: 2019/05/11 17:23:24 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/21 14:21:42 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,5 +106,7 @@ unsigned int		reverse_16bits(unsigned int num);
 void				ft_swapbytes(uint8_t *bytes, unsigned int n);
 char				*ft_strjoin_free(char const *s1, char const *s2);
 int					ft_strequignorecase(char *s1, char *s2);
+void				ft_strreplace(char *str, const char *find,
+								const char *replace);
 
 #endif

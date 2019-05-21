@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 17:40:20 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/19 18:45:18 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/21 14:55:24 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,20 @@ static void		update_color_preset(t_data *data)
 	}
 }
 
-void			draw_variables(t_data *data)
+static void		draw_menu_next(t_data *data)
 {
-	char	text[35];
-
-	ft_bzero(text, 35);
-	ft_sprintf(text, "Iteration : %d\n", data->max_iteration);
-	mlx_string_put(data->mlx_ptr, data->win_ptr, 5, 5,
-		0xFFFFFF, text);
-	ft_bzero(text, 35);
-	ft_sprintf(text, "Zoom : %.2f\n", data->zoom);
-	mlx_string_put(data->mlx_ptr, data->win_ptr, 5, 5 * 5,
-		0xFFFFFF, text);
+	draw_str_centered(data, WIN_X + MENU_X / 2, (float)((float)WIN_Y / 1.6),
+		"[R] -> Reset image");
+	draw_str_centered(data, WIN_X + MENU_X / 2, (float)((float)WIN_Y / 1.5),
+		"------");
+	draw_str_centered(data, WIN_X + MENU_X / 2, (float)((float)WIN_Y / 1.42),
+		"Use the mouse scroll");
+	draw_str_centered(data, WIN_X + MENU_X / 2, (float)((float)WIN_Y / 1.38),
+		"to zoom");
+	draw_str_centered(data, WIN_X + MENU_X / 2, (float)((float)WIN_Y / 1.3),
+		"Move your mouse");
+	draw_str_centered(data, WIN_X + MENU_X / 2, (float)((float)WIN_Y / 1.26),
+		"to change shape");
 }
 
 void			draw_menu(t_data *data)
@@ -65,8 +67,21 @@ void			draw_menu(t_data *data)
 		"[ARROW DOWN] -> Decrease");
 	draw_str_centered(data, WIN_X + MENU_X / 2, (float)((float)WIN_Y / 1.71),
 		"iterations");
-	draw_str_centered(data, WIN_X + MENU_X / 2, (float)((float)WIN_Y / 1.6),
-		"[R] -> Reset image");
+	draw_menu_next(data);
+}
+
+void			draw_variables(t_data *data)
+{
+	char	text[35];
+
+	ft_bzero(text, 35);
+	ft_sprintf(text, "Iteration : %d\n", data->max_iteration);
+	mlx_string_put(data->mlx_ptr, data->win_ptr, 5, 5,
+		0xFFFFFF, text);
+	ft_bzero(text, 35);
+	ft_sprintf(text, "Zoom : %.2f\n", data->zoom);
+	mlx_string_put(data->mlx_ptr, data->win_ptr, 5, 5 * 5,
+		0xFFFFFF, text);
 }
 
 t_bool			change_color_by_mouse(t_data *data, int y, int x)

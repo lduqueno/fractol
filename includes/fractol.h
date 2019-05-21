@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:01:17 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/20 18:02:08 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/21 15:06:13 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ typedef struct			s_split_context
 	int					end_x;
 }						t_context;
 
-void 					set_pointers_to_null(t_data *data);
+void					set_pointers_to_null(t_data *data);
 void					init_default_values(t_data *data);
 
 int						exit_fractol(t_data *data, t_bool free);
@@ -130,7 +130,8 @@ int						execute_tricorn(t_data *data, int y, int x);
 int						input_red_cross(int key, t_data *data);
 int						input_mouse_move(int x, int y, t_data *data);
 int						input_mouse_press(int btn, int x, int y, t_data *data);
-int						input_mouse_release(int btn, int x, int y, t_data *data);
+int						input_mouse_release(int btn, int x, int y,
+							t_data *data);
 int						input_keyboard(int keycode, t_data *data);
 int						input_loop(t_data *data);
 

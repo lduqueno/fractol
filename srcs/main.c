@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:00:43 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/19 18:02:13 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/21 14:37:52 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ static int		check_args(t_data *data, t_fract *fracts, int ac, char **av)
 **	Settings all the pointers to NULL
 */
 
-void 		set_pointers_to_null(t_data *data)
+void			set_pointers_to_null(t_data *data)
 {
 	data->left_clicking = FALSE;
 	data->opencl = NULL;

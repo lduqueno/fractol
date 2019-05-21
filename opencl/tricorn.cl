@@ -1,24 +1,24 @@
 #pragma OPENCL EXTENSION cl_khr_fp64 : enable
 
-__kernel void burningship_double(__global int* pixels, int win_height,
+__kernel void tricorn(__global int* pixels, int win_height,
 			int win_width, int max_iteration, double zoom, double move_x,
 			double move_y, int color_count, __global int *colors)
 {
 	int iteration = 0;
 	int x = get_global_id(0);
 	int y = get_global_id(1);
-	double cRe = 1.5 * (x - win_width / 2) / (0.45 * zoom * win_width) + move_x - 0.4;
-	double cIm = 1.5 * (y - win_height / 2) / (0.45 * zoom * win_height) + move_y - 0.5;
-	double constantsRe = cRe;
-	double constantsIm = cIm;
+	double cRe = 0;
+	double cIm = 0;
+	double constantRe = 3.0 * (x - win_width / 2) / (0.8 * zoom * win_width) + move_x - 0.025;
+	double constantIm = 3.0 * (y - win_height / 2) / (0.8 * zoom * win_height) + move_y;
 
 	double powRe = cRe * cRe;
 	double powIm = cIm * cIm;
 
-	while (iteration < max_iteration && powRe + powIm < 4)
+	while (iteration < max_iteration && powRe + powIm <= 4)
 	{
-		cIm = fabs(2 * cRe * cIm) + constantsIm;
-		cRe = fabs(powRe - powIm + constantsRe);
+		cIm = -2 * cRe * cIm + constantIm;
+		cRe = powRe - powIm + constantRe;
 		powRe = cRe * cRe;
 		powIm = cIm * cIm;
 		iteration++;

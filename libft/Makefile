@@ -6,7 +6,7 @@
 #    By: rlegan <rlegan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/06 13:12:10 by rlegan            #+#    #+#              #
-#    Updated: 2019/05/11 17:23:16 by lduqueno         ###   ########.fr        #
+#    Updated: 2019/05/21 14:21:48 by lduqueno         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -123,7 +123,8 @@ SRC_NAME = ft_memset.c \
 	reverse_16bits.c \
 	ft_swapbytes.c \
 	ft_strjoin_free.c \
-	ft_strequignorecase.c
+	ft_strequignorecase.c \
+	ft_strreplace.c
 
 
 OBJ_PATH = objs
