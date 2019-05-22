@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:00:43 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/21 15:04:41 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/22 15:44:55 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ static void			set_float_args(t_data *data)
 	float			float_zoom;
 	float			float_move_x;
 	float			float_move_y;
+	float			float_cst_r;
+	float			float_cst_i;
 
 	if (data->opencl->double_precision_supported == 0)
 	{
@@ -67,13 +69,17 @@ static void			set_float_args(t_data *data)
 		clSetKernelArg(data->opencl->kernel, 4, sizeof(float), &float_zoom);
 		clSetKernelArg(data->opencl->kernel, 5, sizeof(float), &float_move_x);
 		clSetKernelArg(data->opencl->kernel, 6, sizeof(float), &float_move_y);
+		clSetKernelArg(data->opencl->kernel, 7, sizeof(float), &float_cst_r);
+		clSetKernelArg(data->opencl->kernel, 8, sizeof(float), &float_cst_i);
+		return ;
 	}
-	else
-	{
-		clSetKernelArg(data->opencl->kernel, 4, sizeof(double), &data->zoom);
-		clSetKernelArg(data->opencl->kernel, 5, sizeof(double), &data->move_x);
-		clSetKernelArg(data->opencl->kernel, 6, sizeof(double), &data->move_y);
-	}
+	clSetKernelArg(data->opencl->kernel, 4, sizeof(double), &data->zoom);
+	clSetKernelArg(data->opencl->kernel, 5, sizeof(double), &data->move_x);
+	clSetKernelArg(data->opencl->kernel, 6, sizeof(double), &data->move_y);
+	clSetKernelArg(data->opencl->kernel, 7, sizeof(double),
+		&data->fract->constants.r);
+	clSetKernelArg(data->opencl->kernel, 8, sizeof(double),
+		&data->fract->constants.i);
 }
 
 void				draw_image_opencl(t_data *data)
@@ -93,8 +99,8 @@ void				draw_image_opencl(t_data *data)
 	clSetKernelArg(data->opencl->kernel, 2, sizeof(int), &dimensions[0]);
 	clSetKernelArg(data->opencl->kernel, 3, sizeof(int), &data->max_iteration);
 	set_float_args(data);
-	clSetKernelArg(data->opencl->kernel, 7, sizeof(int), &colors_count);
-	clSetKernelArg(data->opencl->kernel, 8, sizeof(cl_mem),
+	clSetKernelArg(data->opencl->kernel, 9, sizeof(int), &colors_count);
+	clSetKernelArg(data->opencl->kernel, 10, sizeof(cl_mem),
 		&data->opencl->colors_buffer);
 	clEnqueueNDRangeKernel(data->opencl->command_queue, data->opencl->kernel,
 		2, NULL, dimensions, NULL, 0, NULL, NULL);

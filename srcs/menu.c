@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 17:40:20 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/21 16:28:34 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/22 15:46:05 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,9 @@ static void		draw_menu_next(t_data *data)
 {
 	draw_str_centered(data, WIN_X + MENU_X / 2, (float)((float)WIN_Y / 1.6),
 		"[R] -> Reset image");
-	draw_str_centered(data, WIN_X + MENU_X / 2, (float)((float)WIN_Y / 1.5),
-		"[L] -> Lock shape");
+	if (ft_strequ(data->fract->name, "julia"))
+		draw_str_centered(data, WIN_X + MENU_X / 2, (float)((float)WIN_Y / 1.5),
+			"[L] -> Lock shape");
 	draw_str_centered(data, WIN_X + MENU_X / 2, (float)((float)WIN_Y / 1.42),
 		"------");
 	draw_str_centered(data, WIN_X + MENU_X / 2, (float)((float)WIN_Y / 1.34),

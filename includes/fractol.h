@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:01:17 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/21 16:39:35 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/22 15:34:28 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,9 @@ typedef char				t_bool;
 # define DATA_COUNT			7
 # define COLORS_COUNT		16
 # define MAX_ZOOM			17733711455678103904.0
+
+# define JULIA_CST_R		(-0.7)
+# define JULIA_CST_I		0.27015
 
 # define WINDOW_SMALL_ERROR	"The window is too small (minimum is 720x720)"
 # define MALLOC_ERROR		"Unable to allocate memory"

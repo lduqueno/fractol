@@ -1,8 +1,8 @@
 #pragma OPENCL EXTENSION cl_khr_fp64 : enable
 
-__kernel void julia(__global int* pixels, int win_height,
-			int win_width, int max_iteration, double zoom, double move_x,
-			double move_y, int color_count, __global int *colors)
+__kernel void julia(__global int* pixels, int win_height, int win_width,
+					int max_iteration, double zoom, double move_x, double move_y,
+					double cst_r, double cst_i, int color_count, __global int *colors)
 {
 	int iteration = 0;
 	int x = get_global_id(0);
@@ -14,8 +14,8 @@ __kernel void julia(__global int* pixels, int win_height,
 
 	while (iteration < max_iteration && powRe + powIm < 4)
 	{
-		cIm = 2 * cRe * cIm + 0.27015;
-		cRe = powRe - powIm + -0.7;
+		cIm = 2 * cRe * cIm + cst_i;
+		cRe = powRe - powIm + cst_r;
 		powRe = cRe * cRe;
 		powIm = cIm * cIm;
 		iteration++;

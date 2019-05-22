@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 18:14:22 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/21 16:12:43 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/22 15:41:13 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,14 @@ int			input_mouse_move(int x, int y, t_data *data)
 			- 1.0;
 		data->mouse_y = (double)((double)y * 2.0) / (double)((double)WIN_Y + 1)
 			- 1.0;
+		if (!data->lock_shape && ft_strequ(data->fract->name, "julia"))
+		{
+			data->fract->constants.r = data->mouse_x / data->zoom * 2
+				+ JULIA_CST_R;
+			data->fract->constants.i = data->mouse_y / data->zoom * 2
+				- JULIA_CST_I;
+			draw_image(data);
+		}
 	}
 	else if (data->left_clicking)
 		change_color_by_mouse(data, y, x);

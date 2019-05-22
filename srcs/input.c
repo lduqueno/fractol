@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 17:48:36 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/21 17:27:27 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/22 15:26:30 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int			input_keyboard(int keycode, t_data *data)
 	else if (keycode == KEY_R)
 		init_default_values(data);
 	else if (keycode == KEY_L)
-		data->lock_shape = TRUE;
+		data->lock_shape = !data->lock_shape;
 	else if ((keycode == KEY_UP && data->max_iteration < 1500)
 			|| (keycode == KEY_DOWN && data->max_iteration > 3))
 		data->max_iteration += keycode == KEY_UP ? 2 : -2;

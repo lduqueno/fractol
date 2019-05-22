@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:00:43 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/21 14:37:52 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/22 15:29:25 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,12 +120,12 @@ int				main(int ac, char **av)
 	fracts = init_fractals();
 	if (ac < 2 || ac > 3)
 		return (print_usage(fracts));
-	init_default_values(&data);
 	set_pointers_to_null(&data);
 	if (WIN_X < 720 || WIN_Y < 720)
 		error(&data, WINDOW_SMALL_ERROR);
 	if (check_args(&data, fracts, ac, av))
 		return (EXIT_FAILURE);
+	init_default_values(&data);
 	init_mlx(&data);
 	draw_menu(&data);
 	draw_image(&data);
