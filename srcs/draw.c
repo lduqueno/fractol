@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:00:43 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/22 15:28:43 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/24 12:53:29 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,18 @@ void			init_default_values(t_data *data)
 	data->mouse_y = 0;
 	data->fract->constants.r = JULIA_CST_R;
 	data->fract->constants.i = JULIA_CST_I;
+	get_colors(TRUE);
 }
 
 /*
-**	Get the color shade (and init it the first time)
+**	Get the color shade (and init it if 'init' is TRUE)
 */
 
-int				*get_colors(void)
+int				*get_colors(t_bool init)
 {
 	static int	colors[COLORS_COUNT] = {0};
 
-	if (!colors[0])
+	if (init)
 	{
 		colors[0] = 0x421E0F;
 		colors[1] = 0x19071A;
@@ -71,7 +72,7 @@ int				color_from_iteration(int iteration, int max_iteration)
 {
 	if (iteration == max_iteration)
 		return (0x000000);
-	return (get_colors()[iteration % COLORS_COUNT]);
+	return (get_colors(FALSE)[iteration % COLORS_COUNT]);
 }
 
 /*

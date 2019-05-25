@@ -6,7 +6,7 @@
 #    By: rlegan <rlegan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/09/13 16:35:11 by rlegan            #+#    #+#              #
-#    Updated: 2019/05/19 16:37:26 by lduqueno         ###   ########.fr        #
+#    Updated: 2019/05/25 19:52:12 by lduqueno         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ SRC_FILES = main.c \
 			draw_opencl.c \
 			draw.c \
 			menu.c \
+			export_fdf.c \
 			julia.c \
 			mandelbrot.c \
 			burningship.c \

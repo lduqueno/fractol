@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:00:43 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/22 15:29:25 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/25 20:00:58 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,9 @@ static void		init_mlx(t_data *data)
 	if (!(data->pixels = (unsigned int *)mlx_get_data_addr(data->img_ptr,
 			&avoid, &avoid, &avoid)))
 		error(data, MLX_ERROR);
+	if (!(data->iterations_array = (unsigned int *)malloc(sizeof(unsigned int)
+		* WIN_Y * WIN_X)))
+		error(data, MLX_ERROR);
 }
 
 /*
@@ -104,6 +107,7 @@ void			set_pointers_to_null(t_data *data)
 	data->win_ptr = NULL;
 	data->img_ptr = NULL;
 	data->pixels = NULL;
+	data->iterations_array = NULL;
 	data->menu_ptr = NULL;
 	data->menu_pixels = NULL;
 }

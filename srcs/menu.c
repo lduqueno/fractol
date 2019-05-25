@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 17:40:20 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/22 15:46:05 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/24 12:53:54 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void		update_color_preset(t_data *data)
 	data->color_value -= COLORS_COUNT * 100;
 	while (i < COLORS_COUNT)
 	{
-		get_colors()[i] = data->color_value - i * 200;
+		get_colors(FALSE)[i] = data->color_value - i * 200;
 		i++;
 	}
 }

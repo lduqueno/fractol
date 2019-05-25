@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 17:48:36 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/22 15:26:30 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/25 20:23:12 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,21 @@
 #include "keys.h"
 #include "float.h"
 
-int			input_red_cross(int keycode, t_data *data)
+static int	next_input_keyboard(int keycode, t_data *data)
 {
-	(void)keycode;
-	return (exit_fractol(data, FALSE));
-}
-
-int			input_loop(t_data *data)
-{
-	double	increase;
-
-	increase = 0.01 * data->zoom;
-	if (data->auto_zoom && data->zoom + increase < MAX_ZOOM)
+	if (keycode == KEY_UP && data->max_iteration < 1500)
+		data->max_iteration += 2;
+	else if (keycode == KEY_DOWN && data->max_iteration > 3)
+		data->max_iteration -= 2;
+	else if (keycode == KEY_F)
 	{
-		data->zoom += increase;
-		data->move_x += data->mouse_x / data->zoom / 3;
-		data->move_y += data->mouse_y / data->zoom / 3;
-		draw_image(data);
+		ft_printf("Writing fractal in %s.fdf..\n", data->fract->name);
+		export_to_fdf(data);
+		ft_printf("Done!\n");
 	}
-	return (1);
+	else
+		return (1);
+	return (draw_image(data));
 }
 
 int			input_keyboard(int keycode, t_data *data)
@@ -56,10 +52,28 @@ int			input_keyboard(int keycode, t_data *data)
 		init_default_values(data);
 	else if (keycode == KEY_L)
 		data->lock_shape = !data->lock_shape;
-	else if ((keycode == KEY_UP && data->max_iteration < 1500)
-			|| (keycode == KEY_DOWN && data->max_iteration > 3))
-		data->max_iteration += keycode == KEY_UP ? 2 : -2;
 	else
-		return (1);
+		return (next_input_keyboard(keycode, data));
 	return (draw_image(data));
+}
+
+int			input_red_cross(int keycode, t_data *data)
+{
+	(void)keycode;
+	return (exit_fractol(data, FALSE));
+}
+
+int			input_loop(t_data *data)
+{
+	double	increase;
+
+	increase = 0.01 * data->zoom;
+	if (data->auto_zoom && data->zoom + increase < MAX_ZOOM)
+	{
+		data->zoom += increase;
+		data->move_x += data->mouse_x / data->zoom / 3;
+		data->move_y += data->mouse_y / data->zoom / 3;
+		draw_image(data);
+	}
+	return (1);
 }

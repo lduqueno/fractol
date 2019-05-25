@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 16:15:33 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/19 17:59:55 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/25 20:01:42 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void		free_all(t_data *data)
 		ft_strdel(&data->opencl->source_str);
 		free(data->opencl);
 	}
+	if (data->iterations_array)
+		free(data->iterations_array);
 	set_pointers_to_null(data);
 }
 

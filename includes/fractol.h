@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:01:17 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/22 15:34:28 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/25 20:04:23 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef char				t_bool;
 # define WINDOW_SMALL_ERROR	"The window is too small (minimum is 720x720)"
 # define MALLOC_ERROR		"Unable to allocate memory"
 # define MLX_ERROR			"Unable to load the MLX"
-# define OPEN_ERROR			"Unable to open opencl file"
+# define OPEN_ERROR			"Unable to open file"
 # define READ_ERROR			"Unable to read opencl file"
 # define OPENCL_ERROR		"Unable to compute opencl file"
 # define OPENCL_LOG_ERROR	"Unable to build opencl log"
@@ -68,6 +68,7 @@ typedef struct			s_opencl
 	char				*source_str;
 	cl_mem				pixels_buffer;
 	cl_mem				colors_buffer;
+	cl_mem				iterations_buffer;
 }						t_opencl;
 
 typedef struct			s_complex
@@ -84,6 +85,7 @@ typedef struct			s_data
 	void				*img_ptr;
 	void				*menu_ptr;
 	unsigned int		*pixels;
+	unsigned int		*iterations_array;
 	unsigned int		*menu_pixels;
 	unsigned int		color_value;
 	int					wheel_width;
@@ -141,7 +143,7 @@ int						input_mouse_release(int btn, int x, int y,
 int						input_keyboard(int keycode, t_data *data);
 int						input_loop(t_data *data);
 
-int						*get_colors(void);
+int						*get_colors(t_bool init);
 int						color_from_iteration(int iteration, int max_iteration);
 t_bool					change_color_by_mouse(t_data *data, int y, int x);
 
@@ -151,9 +153,11 @@ void					draw_image_thread(t_data *data);
 void					draw_str_centered(t_data *data, int x, int y, char *s);
 void					draw_variables(t_data *data);
 void					draw_menu(t_data *data);
-
 void					draw_image_opencl(t_data *data);
+
 void					init_opencl(t_data *data);
 void					close_opencl(t_opencl *cl);
+
+void					export_to_fdf(t_data *data);
 
 #endif
