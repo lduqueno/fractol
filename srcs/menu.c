@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 17:40:20 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/24 12:53:54 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/25 21:16:30 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,19 +30,24 @@ static void		draw_menu_next(t_data *data)
 {
 	draw_str_centered(data, WIN_X + MENU_X / 2, (float)((float)WIN_Y / 1.6),
 		"[R] -> Reset image");
+	draw_str_centered(data, WIN_X + MENU_X / 2, (float)((float)WIN_Y / 1.5),
+		"[F] -> Export as .fdf");
 	if (ft_strequ(data->fract->name, "julia"))
-		draw_str_centered(data, WIN_X + MENU_X / 2, (float)((float)WIN_Y / 1.5),
-			"[L] -> Lock shape");
-	draw_str_centered(data, WIN_X + MENU_X / 2, (float)((float)WIN_Y / 1.42),
+		draw_str_centered(data, WIN_X + MENU_X / 2,
+			(float)((float)WIN_Y / 1.42), "[L] -> Lock shape");
+	draw_str_centered(data, WIN_X + MENU_X / 2, (float)((float)WIN_Y / 1.33),
 		"------");
-	draw_str_centered(data, WIN_X + MENU_X / 2, (float)((float)WIN_Y / 1.34),
+	draw_str_centered(data, WIN_X + MENU_X / 2, (float)((float)WIN_Y / 1.27),
 		"Use the mouse scroll");
-	draw_str_centered(data, WIN_X + MENU_X / 2, (float)((float)WIN_Y / 1.3),
+	draw_str_centered(data, WIN_X + MENU_X / 2, (float)((float)WIN_Y / 1.24),
 		"to zoom");
-	draw_str_centered(data, WIN_X + MENU_X / 2, (float)((float)WIN_Y / 1.21),
-		"Move your mouse to");
-	draw_str_centered(data, WIN_X + MENU_X / 2, (float)((float)WIN_Y / 1.17),
-		"change shape");
+	if (ft_strequ(data->fract->name, "julia"))
+	{
+		draw_str_centered(data, WIN_X + MENU_X / 2,
+			(float)((float)WIN_Y / 1.17), "Move your mouse to");
+		draw_str_centered(data, WIN_X + MENU_X / 2,
+			(float)((float)WIN_Y / 1.14), "change shape");
+	}
 }
 
 void			draw_menu(t_data *data)
