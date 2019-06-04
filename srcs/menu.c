@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 17:40:20 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/06/04 16:39:21 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/06/04 16:53:46 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,13 +98,12 @@ t_bool			change_color_by_mouse(t_data *data, int y, int x)
 {
 	x -= WIN_X + MENU_X / 2 - data->wheel_width / 2;
 	y -= WIN_Y / 12;
-	if (x >= 0 && x <= data->wheel_width && y >= 0 && y <= data->wheel_height)
+	if (x > 0 && x < data->wheel_width && y > 0 && y < data->wheel_height)
 	{
 		if (data->menu_pixels[(y * data->wheel_width) + x] != 4278190080)
 		{
 			data->left_clicking = TRUE;
 			data->color_value = data->menu_pixels[(y * data->wheel_width) + x];
-			ft_printf("Color_value = %lu\n", data->color_value);
 			update_color_preset(data);
 			draw_image(data);
 			return (TRUE);

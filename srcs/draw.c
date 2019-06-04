@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:00:43 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/06/04 16:32:36 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/06/04 16:42:29 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void			init_default_values(t_data *data)
 **	Get the color shade (and init it if 'init' is TRUE)
 */
 
-int			*get_colors(t_bool init)
+int				*get_colors(t_bool init)
 {
 	static int	colors[COLORS_COUNT] = {0};
 

@@ -6,7 +6,7 @@
 /*   By: rlegan <rlegan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 13:22:33 by rlegan            #+#    #+#             */
-/*   Updated: 2019/01/29 21:56:20 by rlegan           ###   ########.fr       */
+/*   Updated: 2019/06/04 16:58:23 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef union		u_zeroinf
 typedef struct		s_fonc
 {
 	char			c;
-	void			(*ptr)();
+	void			(*ptr)(void);
 }					t_fonc;
 
 typedef struct		s_arg
