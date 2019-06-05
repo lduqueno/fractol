@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:00:43 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/24 12:53:29 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/06/04 16:42:29 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ int				*get_colors(t_bool init)
 
 int				color_from_iteration(int iteration, int max_iteration)
 {
+	if (iteration < 0)
+		iteration = 1;
 	if (iteration == max_iteration)
 		return (0x000000);
 	return (get_colors(FALSE)[iteration % COLORS_COUNT]);
@@ -88,8 +90,8 @@ void			draw_str_centered(t_data *data, int x, int y, char *s)
 	len = ft_strlen(s);
 	if (len == 0)
 		return ;
-	mlx_string_put(data->mlx_ptr, data->win_ptr, x - len * 10 / 2,
-		y, 0xFFFFFF, s);
+	mlx_string_put(data->mlx_ptr, data->win_ptr, x - len * 10 / 2, y, 0xFFFFFF,
+		s);
 }
 
 /*

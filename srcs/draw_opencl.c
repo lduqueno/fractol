@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:00:43 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/25 19:47:40 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/06/04 16:44:35 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ static void			set_float_args(t_data *data)
 {
 	float			values[5];
 
+	clSetKernelArg(data->opencl->kernel, 3, sizeof(int), &data->max_iteration);
 	if (data->opencl->double_precision_supported == 0)
 	{
 		values[0] = (float)data->zoom;
@@ -94,7 +95,6 @@ void				draw_image_opencl(t_data *data)
 		&data->opencl->pixels_buffer);
 	clSetKernelArg(data->opencl->kernel, 1, sizeof(int), &dimensions[1]);
 	clSetKernelArg(data->opencl->kernel, 2, sizeof(int), &dimensions[0]);
-	clSetKernelArg(data->opencl->kernel, 3, sizeof(int), &data->max_iteration);
 	set_float_args(data);
 	clSetKernelArg(data->opencl->kernel, 9, sizeof(int), &colors_count);
 	clSetKernelArg(data->opencl->kernel, 10, sizeof(cl_mem),

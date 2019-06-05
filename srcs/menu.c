@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 17:40:20 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/25 21:16:30 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/06/04 16:53:46 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,11 @@ static void		update_color_preset(t_data *data)
 	int		i;
 
 	i = 0;
-	data->color_value -= COLORS_COUNT * 100;
+	if (data->color_value < COLORS_COUNT * 100)
+		data->color_value += COLORS_COUNT * 100;
 	while (i < COLORS_COUNT)
 	{
-		get_colors(FALSE)[i] = data->color_value - i * 200;
+		get_colors(FALSE)[i] = data->color_value - i * 100;
 		i++;
 	}
 }
@@ -97,7 +98,7 @@ t_bool			change_color_by_mouse(t_data *data, int y, int x)
 {
 	x -= WIN_X + MENU_X / 2 - data->wheel_width / 2;
 	y -= WIN_Y / 12;
-	if (x >= 0 && x <= data->wheel_width && y >= 0 && y <= data->wheel_height)
+	if (x > 0 && x < data->wheel_width && y > 0 && y < data->wheel_height)
 	{
 		if (data->menu_pixels[(y * data->wheel_width) + x] != 4278190080)
 		{
