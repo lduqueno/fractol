@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 17:48:36 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/25 20:23:12 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/05/29 17:23:00 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,12 @@ int			input_loop(t_data *data)
 {
 	double	increase;
 
-	increase = 0.01 * data->zoom;
+	increase = 0.007 * data->zoom;
 	if (data->auto_zoom && data->zoom + increase < MAX_ZOOM)
 	{
 		data->zoom += increase;
-		data->move_x += data->mouse_x / data->zoom / 3;
-		data->move_y += data->mouse_y / data->zoom / 3;
+		data->move_x += data->mouse_x / data->zoom / 4;
+		data->move_y += data->mouse_y / data->zoom / 4;
 		draw_image(data);
 	}
 	return (1);

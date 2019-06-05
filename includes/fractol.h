@@ -29,9 +29,12 @@ typedef char				t_bool;
 # define FALSE				0
 
 # define FRACTAL_COUNT		4
-
-# define WIN_X				800
-# define WIN_Y				800
+# ifndef WIN_X
+#  define WIN_X				800
+# endif
+# ifndef WIN_Y
+#  define WIN_Y				800
+# endif
 # define MENU_X				WIN_X / 3
 
 # define THREAD_COUNT		12
