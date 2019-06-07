@@ -6,13 +6,14 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 17:48:36 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/29 17:23:00 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/06/05 17:45:10 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 #include "keys.h"
 #include "float.h"
+#include "ft_printf.h"
 
 static int	next_input_keyboard(int keycode, t_data *data)
 {

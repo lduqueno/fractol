@@ -6,15 +6,12 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:01:17 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/06/04 16:26:37 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/06/06 15:35:11 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
-
-# include "libft.h"
-# include <stdio.h>
 
 # define CL_SILENCE_DEPRECATION
 # ifdef __APPLE__
@@ -28,7 +25,7 @@ typedef char				t_bool;
 # define TRUE				1
 # define FALSE				0
 
-# define FRACTAL_COUNT		4
+# define FRACTAL_COUNT		5
 # ifndef WIN_X
 #  define WIN_X				800
 # endif
@@ -37,7 +34,7 @@ typedef char				t_bool;
 # endif
 # define MENU_X				WIN_X / 3
 
-# define THREAD_COUNT		12
+# define THREAD_COUNT		500
 
 # define MAX_SOURCE_SIZE	0x100000
 # define DATA_COUNT			7
@@ -137,6 +134,7 @@ int						execute_julia(t_data *data, int y, int x);
 int						execute_mandelbrot(t_data *data, int y, int x);
 int						execute_burningship(t_data *data, int y, int x);
 int						execute_tricorn(t_data *data, int y, int x);
+int						execute_flower(t_data *data, int y, int x);
 
 int						input_red_cross(int key, t_data *data);
 int						input_mouse_move(int x, int y, t_data *data);

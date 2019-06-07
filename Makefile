@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+         #
+#    By: rlegan <rlegan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/09/13 16:35:11 by rlegan            #+#    #+#              #
-#    Updated: 2019/06/04 16:54:37 by lduqueno         ###   ########.fr        #
+#    Updated: 2019/06/05 17:57:11 by lduqueno         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,8 @@ SRC_FILES = main.c \
 			julia.c \
 			mandelbrot.c \
 			burningship.c \
-			tricorn.c
+			tricorn.c \
+			flower.c
 LIBFT_DIR = libft
 OBJS_DIR = objs
 OBJS_FILES = $(SRC_FILES:.c=.o)
@@ -58,7 +59,7 @@ $(OBJS_DIR):
 	@mkdir $(OBJS_DIR)
 
 $(OBJS_DIR)/%.o:$(SRC_DIR)/%.c
-	@$(CC) $(CFLAGS) -DWIN_X=$(WIN_X) -DWIN_Y=$(WIN_Y) -o $@ -c $< -I $(HEADER) -I $(LIBFT_DIR) -I $(MINILIBX_DIR)
+	@$(CC) $(CFLAGS) -DWIN_X=$(WIN_X) -DWIN_Y=$(WIN_Y) -o $@ -c $< -I $(HEADER) -I $(LIBFT_DIR)/includes -I $(MINILIBX_DIR)
 	@echo "\033[0;33mCompiling $<.. \t\033[0;32mSuccess!\033m\017"
 
 clean:

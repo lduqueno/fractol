@@ -6,11 +6,12 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 16:32:54 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/25 19:37:20 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/06/05 17:56:18 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+#include "libft.h"
 
 /*
 **	Init all the fractals
@@ -28,6 +29,8 @@ t_fract		*init_fractals(void)
 		.execute = execute_burningship };
 	fractals[3] = (t_fract) { .name = "tricorn",
 		.execute = execute_tricorn };
+	fractals[4] = (t_fract) { .name = "flower",
+		.execute = execute_flower };
 	return (fractals);
 }
 

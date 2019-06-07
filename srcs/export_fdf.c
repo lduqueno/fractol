@@ -6,11 +6,13 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 16:12:34 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/29 17:31:34 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/06/05 17:54:44 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+#include "ft_printf.h"
+#include "libft.h"
 
 /*
 **	Export current frame to a FdF map.

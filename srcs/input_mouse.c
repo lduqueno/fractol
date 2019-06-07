@@ -6,11 +6,12 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 18:14:22 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/29 17:20:55 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/06/05 18:08:32 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+#include "libft.h"
 
 int			input_mouse_move(int x, int y, t_data *data)
 {

@@ -6,11 +6,12 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 16:12:34 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/11 18:44:00 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/06/05 17:45:01 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+#include "ft_printf.h"
 
 /*
 ** Free all the pointers and exit the program

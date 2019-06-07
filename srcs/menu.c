@@ -6,12 +6,14 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 17:40:20 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/06/04 16:53:46 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/06/05 17:55:40 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 #include "mlx.h"
+#include "ft_printf.h"
+#include "libft.h"
 
 static void		update_color_preset(t_data *data)
 {

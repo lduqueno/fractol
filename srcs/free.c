@@ -6,12 +6,13 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 16:15:33 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/05/25 20:01:42 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/06/05 17:54:55 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 #include "mlx.h"
+#include "libft.h"
 
 void		free_all(t_data *data)
 {
