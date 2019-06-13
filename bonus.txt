@@ -1,0 +1,19 @@
+- Menu
+    - [Color picker]
+    - [Aide affichee]
+    - [Proportionnel a la taille de fenetre]
+
+- Controles
+    - [Zoom sur la souris]
+    - [Deplacement touches directionelles]
+    - [Auto zoom]
+    - [Augmentation/Diminution des iterations]
+    - [Touche reset]
+
+- Calculs
+    - [Multithreading]
+    - [OpenCL]
+
+- Compilation
+    - [make WIN_X=1000 WIN_Y=1000 pour changer la taille de la fenetre]
+

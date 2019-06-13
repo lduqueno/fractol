@@ -6,7 +6,7 @@
 #    By: rlegan <rlegan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/09/13 16:35:11 by rlegan            #+#    #+#              #
-#    Updated: 2019/06/05 17:57:11 by lduqueno         ###   ########.fr        #
+#    Updated: 2019/06/13 15:27:42 by lduqueno         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,11 +28,13 @@ SRC_FILES = main.c \
 			draw.c \
 			menu.c \
 			export_fdf.c \
-			julia.c \
-			mandelbrot.c \
-			burningship.c \
-			tricorn.c \
-			flower.c
+			complex.c \
+			fractal_julia.c \
+			fractal_mandelbrot.c \
+			fractal_burningship.c \
+			fractal_tricorn.c \
+			fractal_flower.c \
+			fractal_newton.c
 LIBFT_DIR = libft
 OBJS_DIR = objs
 OBJS_FILES = $(SRC_FILES:.c=.o)

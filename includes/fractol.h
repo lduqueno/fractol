@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:01:17 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/06/06 15:35:11 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/06/13 15:30:17 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef char				t_bool;
 # define TRUE				1
 # define FALSE				0
 
-# define FRACTAL_COUNT		5
+# define FRACTAL_COUNT		6
 # ifndef WIN_X
 #  define WIN_X				800
 # endif
@@ -33,6 +33,8 @@ typedef char				t_bool;
 #  define WIN_Y				800
 # endif
 # define MENU_X				WIN_X / 3
+
+# define PI 3.14159265359
 
 # define THREAD_COUNT		500
 
@@ -135,6 +137,7 @@ int						execute_mandelbrot(t_data *data, int y, int x);
 int						execute_burningship(t_data *data, int y, int x);
 int						execute_tricorn(t_data *data, int y, int x);
 int						execute_flower(t_data *data, int y, int x);
+int						execute_newton(t_data *data, int y, int x);
 
 int						input_red_cross(int key, t_data *data);
 int						input_mouse_move(int x, int y, t_data *data);
@@ -160,5 +163,11 @@ void					init_opencl(t_data *data);
 void					close_opencl(t_opencl *cl);
 
 void					export_to_fdf(t_data *data);
+
+double					zabs(t_complex complex);
+t_complex				zmultiply(t_complex a, t_complex b);
+t_complex				zpow(t_complex complex, int n);
+t_complex				zsubtract(t_complex a, t_complex b);
+t_complex				zdivide(t_complex a, t_complex b);
 
 #endif
