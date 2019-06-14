@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:01:17 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/06/14 13:31:12 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/06/14 16:16:08 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef char				t_bool;
 # define TRUE				1
 # define FALSE				0
 
-# define FRACTAL_COUNT		6
+# define FRACTAL_COUNT		7
 # ifndef WIN_X
 #  define WIN_X				800
 # endif
@@ -138,6 +138,7 @@ int						execute_burningship(t_data *data, int y, int x);
 int						execute_tricorn(t_data *data, int y, int x);
 int						execute_magnet(t_data *data, int y, int x);
 int						execute_newton(t_data *data, int y, int x);
+int						execute_nova(t_data *data, int y, int x);
 
 int						input_red_cross(int key, t_data *data);
 int						input_mouse_move(int x, int y, t_data *data);
