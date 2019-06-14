@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:00:43 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/06/13 20:48:30 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/06/14 11:29:12 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "mlx.h"
 #include "libft.h"
 
-https://github.com/JPBotelho/Fractal-Megacollection/tree/master/Content/Fractals/Single%20Fractals
+//https://github.com/JPBotelho/Fractal-Megacollection/tree/master/Content/Fractals/Single%20Fractals
 //new material
 //magnet
 //buffalo
@@ -30,7 +30,7 @@ static int		print_usage(t_fract *fractals)
 	int		i;
 
 	i = 0;
-	ft_printf("Fractol usage : ./fractol (-opencl) <fractal>\nAvailable "
+	ft_printf("Fractol usage : ./fractol (-opencl -float) <fractal>\nAvailable "
 		"fractals : ");
 	while (i < FRACTAL_COUNT)
 	{
@@ -70,54 +70,50 @@ static void		init_mlx(t_data *data)
 }
 
 /*
-**	Parse and verify args (find fract name and draw mode)
+**	Parse and verify args (verify if we should use opencl or float mode)
 */
 
 static int		check_args(t_data *data, t_fract *fracts, int ac, char **av)
 {
 	int			i;
-	t_fract		*found;
 	t_bool		use_opencl;
+	t_bool		use_float;
 
 	i = 0;
-	found = NULL;
 	use_opencl = FALSE;
+	use_float = FALSE;
 	while (++i < ac)
-		if (ft_strequ(av[i], "-opencl") && !use_opencl)
+		if (ft_strequ(av[i], "-opencl"))
 			use_opencl = TRUE;
-		else if (found || !(found = get_fractal_by_name(fracts, av[i])))
+		else if (ft_strequ(av[i], "-float"))
+			use_float = TRUE;
+		else if (data->fract || !(data->fract = get_fractal_by_name(fracts, av[i])))
 			return (print_usage(fracts));
-	if (found)
-		data->fract = found;
-	else
+	if (!data->fract)
 		return (print_usage(fracts));
-	if (use_opencl)
+	if (use_float && !use_opencl)
 	{
-		init_opencl(data);
-		if (data->opencl->double_precision_supported == 0)
-			ft_printf("Double precision is NOT supported on this device.\nThe "
-				"quality of the fractal may decrease a lot.\n");
+		ft_printf("Float mode can only be used with the -opencl arg.\n");
+		return (EXIT_FAILURE);
 	}
-	return (0);
+	if (use_opencl)
+		init_opencl(data, use_float);
+	return (EXIT_SUCCESS);
 }
 
 /*
-**	Settings all the pointers to NULL
+**	Init all hooks (keyboard, mouse, auto loop..)
 */
 
-void			set_pointers_to_null(t_data *data)
+static void		add_mlx_hooks(t_data *data)
 {
-	data->left_clicking = FALSE;
-	data->opencl = NULL;
-	data->fract = NULL;
-	data->win_title = NULL;
-	data->mlx_ptr = NULL;
-	data->win_ptr = NULL;
-	data->img_ptr = NULL;
-	data->pixels = NULL;
-	data->iterations_array = NULL;
-	data->menu_ptr = NULL;
-	data->menu_pixels = NULL;
+	mlx_hook(data->win_ptr, 17, 0, input_red_cross, data);
+	mlx_hook(data->win_ptr, 6, 0, input_mouse_move, data);
+	mlx_hook(data->win_ptr, 4, 0, input_mouse_press, data);
+	mlx_hook(data->win_ptr, 5, 0, input_mouse_release, data);
+	mlx_hook(data->win_ptr, 2, 0, input_keyboard, data);
+	mlx_loop_hook(data->mlx_ptr, input_loop, data);
+	mlx_loop(data->mlx_ptr);
 }
 
 /*
@@ -130,9 +126,9 @@ int				main(int ac, char **av)
 	t_fract		*fracts;
 
 	fracts = init_fractals();
-	if (ac < 2 || ac > 3)
+	if (ac < 2 || ac > 4)
 		return (print_usage(fracts));
-	set_pointers_to_null(&data);
+	ft_bzero(&data, sizeof(data));
 	if (WIN_X < 720 || WIN_Y < 720)
 		error(&data, WINDOW_SMALL_ERROR);
 	if (check_args(&data, fracts, ac, av))
@@ -141,12 +137,6 @@ int				main(int ac, char **av)
 	init_mlx(&data);
 	draw_menu(&data);
 	draw_image(&data);
-	mlx_hook(data.win_ptr, 17, 0, input_red_cross, &data);
-	mlx_hook(data.win_ptr, 6, 0, input_mouse_move, &data);
-	mlx_hook(data.win_ptr, 4, 0, input_mouse_press, &data);
-	mlx_hook(data.win_ptr, 5, 0, input_mouse_release, &data);
-	mlx_hook(data.win_ptr, 2, 0, input_keyboard, &data);
-	mlx_loop_hook(data.mlx_ptr, input_loop, &data);
-	mlx_loop(data.mlx_ptr);
+	add_mlx_hooks(&data);
 	return (EXIT_SUCCESS);
 }

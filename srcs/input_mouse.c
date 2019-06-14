@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 18:14:22 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/06/05 18:08:32 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/06/14 11:45:32 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,8 @@ int			input_mouse_move(int x, int y, t_data *data)
 	}
 	if (x <= WIN_X)
 	{
-		data->mouse_x = ((double)((double)x * 2.0) / (double)((double)WIN_X + 1)
-			- 1.0) / 3.0;
-		data->mouse_y = ((double)((double)y * 2.0) / (double)((double)WIN_Y + 1)
-			- 1.0) / 3.0;
+		data->mouse_x = ((double)(x * 2.0) / (double)(WIN_X + 1) - 1.0) / 3.0;
+		data->mouse_y = ((double)(y * 2.0) / (double)(WIN_Y + 1) - 1.0) / 3.0;
 		if (!data->lock_shape && ft_strequ(data->fract->name, "julia"))
 		{
 			data->fract->constants.r = data->mouse_x / data->zoom * 2

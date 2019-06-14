@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:01:17 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/06/13 15:30:17 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/06/14 11:01:31 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ typedef struct			s_opencl
 	cl_uint				ret_num_devices;
 	cl_uint				ret_num_platforms;
 	size_t				source_size;
-	cl_uint				double_precision_supported;
+	cl_uint				double_precision;
 	char				*source_str;
 	cl_mem				pixels_buffer;
 	cl_mem				colors_buffer;
@@ -159,7 +159,7 @@ void					draw_variables(t_data *data);
 void					draw_menu(t_data *data);
 void					draw_image_opencl(t_data *data);
 
-void					init_opencl(t_data *data);
+void					init_opencl(t_data *data, t_bool use_float);
 void					close_opencl(t_opencl *cl);
 
 void					export_to_fdf(t_data *data);
