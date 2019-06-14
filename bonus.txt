@@ -1,3 +1,5 @@
+-----------------------------	BONUS	-----------------------------	
+
 - Menu
     - [Color picker]
     - [Aide affichee]
@@ -17,3 +19,11 @@
 - Compilation
     - [make WIN_X=1000 WIN_Y=1000 pour changer la taille de la fenetre]
 
+---------------------------		FRACTALES    --------------------------
+
+(Obligatoire) Julia
+(Obligatoire) Mandelbrot
+(Obligatoire) Burningship
+(Bonus)		  Magnet
+(Bonus)		  Newton
+(Bonus)		  Tricorn

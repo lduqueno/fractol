@@ -6,7 +6,7 @@
 #    By: rlegan <rlegan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/09/13 16:35:11 by rlegan            #+#    #+#              #
-#    Updated: 2019/06/14 13:32:21 by lduqueno         ###   ########.fr        #
+#    Updated: 2019/06/14 15:07:22 by lduqueno         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,7 @@ WIN_Y = 800
 all: $(NAME)
 
 $(NAME): $(OBJS_DIR) $(OBJS)
-	@echo "\n\033[0;33mCompiling final project.. \t\033[0;32mSuccess!\033m\017"
+	@echo "\n\033[0;33mCompiling final project.. \033[0;32mSuccess!\033m\017"
 	@$(CC) $(CFLAGS) $(MLX_FLAGS) -o $(NAME) $(LIBFT_DIR)/libft.a $(MINILIBX_DIR)/libmlx.a $(OBJS)
 	@echo "\033[0;31m------------- [ \033[0;36mEVERYTHING IS OK \033[0;31m] -----------\033m\017\033[0m"
 
@@ -63,7 +63,7 @@ $(OBJS_DIR):
 
 $(OBJS_DIR)/%.o:$(SRC_DIR)/%.c
 	@$(CC) $(CFLAGS) -DWIN_X=$(WIN_X) -DWIN_Y=$(WIN_Y) -o $@ -c $< -I $(HEADER) -I $(LIBFT_DIR)/includes -I $(MINILIBX_DIR)
-	@echo "\033[0;33mCompiling $<.. \t\033[0;32mSuccess!\033m\017"
+	@echo "\033[0;33mCompiling $<.. \033[0;32mSuccess!\033m\017"
 
 clean:
 	@rm -f $(OBJS)
