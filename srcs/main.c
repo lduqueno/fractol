@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:00:43 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/06/14 11:29:12 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/06/14 13:09:27 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 #include "libft.h"
 
 //https://github.com/JPBotelho/Fractal-Megacollection/tree/master/Content/Fractals/Single%20Fractals
-//new material
 //magnet
 //buffalo
 //nova
@@ -65,7 +64,7 @@ static void		init_mlx(t_data *data)
 			&avoid, &avoid, &avoid)))
 		error(data, MLX_ERROR);
 	if (!(data->iterations_array = (unsigned int *)malloc(sizeof(unsigned int)
-		* WIN_Y * WIN_X)))
+			* WIN_Y * WIN_X)))
 		error(data, MLX_ERROR);
 }
 
@@ -87,7 +86,8 @@ static int		check_args(t_data *data, t_fract *fracts, int ac, char **av)
 			use_opencl = TRUE;
 		else if (ft_strequ(av[i], "-float"))
 			use_float = TRUE;
-		else if (data->fract || !(data->fract = get_fractal_by_name(fracts, av[i])))
+		else if (data->fract
+			|| !(data->fract = get_fractal_by_name(fracts, av[i])))
 			return (print_usage(fracts));
 	if (!data->fract)
 		return (print_usage(fracts));

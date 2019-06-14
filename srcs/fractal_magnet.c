@@ -1,39 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   flower.c                                           :+:      :+:    :+:   */
+/*   fractal_magnet.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 18:15:55 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/06/05 18:05:31 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/06/14 13:48:44 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 #include "math.h"
 
-int				execute_flower(t_data *data, int y, int x)
+int				execute_magnet(t_data *data, int y, int x)
 {
 	unsigned int	iteration;
-	t_complex		complex;
-	t_complex		tmp_pow;
+	t_complex		c;
+	t_complex		two;
 
 	iteration = 0;
-	complex.r = 1.5 * (x - WIN_X / 2) / (0.5 * data->zoom * WIN_X)
-		+ data->move_x;
-	complex.i = 1.5 * (y - WIN_Y / 2) / (0.5 * data->zoom * WIN_Y)
+	c.r = 1.5 * (x - WIN_X / 2) / (0.1 * data->zoom * WIN_X)
+		+ data->move_x - 0.7;
+	c.i = 1.5 * (y - WIN_Y / 2) / (0.1 * data->zoom * WIN_Y)
 		+ data->move_y;
-	tmp_pow.r = complex.r * complex.r;
-	tmp_pow.i = complex.i * complex.i;
-	while (iteration < data->max_iteration && tmp_pow.r + tmp_pow.i < 4)
+	two.r = 2.0;
+	two.i = 0.0;
+	while (iteration < data->max_iteration)
 	{
-		complex.i = ((2 * complex.r / 3) - (tmp_pow.i - tmp_pow.r))
-			/ (2 * (tmp_pow.r + tmp_pow.i)) / 3;
-		complex.r = ((2 * complex.r / 3) + (2 * complex.r * complex.i))
-			/ (2 * (tmp_pow.r + tmp_pow.i)) / 3;
-		tmp_pow.r = complex.r * complex.r;
-		tmp_pow.i = complex.i * complex.i;
+		if (c.r * c.r + c.i * c.i > 48)
+			break ;
+		c = zpow(zdivide(zpow(c, 2), (zsubtract(zmultiply(c, two), two))), 2);
 		iteration++;
 	}
 	return (iteration);

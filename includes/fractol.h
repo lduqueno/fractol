@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:01:17 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/06/14 11:01:31 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/06/14 13:31:12 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ int						execute_julia(t_data *data, int y, int x);
 int						execute_mandelbrot(t_data *data, int y, int x);
 int						execute_burningship(t_data *data, int y, int x);
 int						execute_tricorn(t_data *data, int y, int x);
-int						execute_flower(t_data *data, int y, int x);
+int						execute_magnet(t_data *data, int y, int x);
 int						execute_newton(t_data *data, int y, int x);
 
 int						input_red_cross(int key, t_data *data);

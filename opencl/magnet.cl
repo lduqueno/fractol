@@ -37,17 +37,7 @@ inline cfloat zadd(cfloat a, cfloat b)
 	return (cfloat)(a.x + b.x, a.y + b.y);
 }
 
-inline cfloat f(cfloat c)
-{
-	return zsubtract(zpow(c, 3), (cfloat)(1.0, 0.0));
-}
-
-inline cfloat df(cfloat c)
-{
-	return zmult(zmult(c, c), (cfloat)(3.0, 0.0));
-}
-
-__kernel void newton(__global int* pixels, int win_height, int win_width,
+__kernel void magnet(__global int* pixels, int win_height, int win_width,
 					int max_iteration, double zoom, double move_x, double move_y,
 					double cst_r, double cst_i, int color_count, __global int *colors,
 					__global int *iterations)
@@ -55,15 +45,16 @@ __kernel void newton(__global int* pixels, int win_height, int win_width,
 	int iteration = 0;
 	int x = get_global_id(0);
 	int y = get_global_id(1);
-	cfloat c = (cfloat)((x - win_width / 2) / (0.01 * zoom * win_width) + 30 * move_x,
-		(y - win_height / 2) / (0.01 * zoom * win_height) + 30 * move_y);
+	cfloat c = (cfloat)(1.5 * (x - win_width / 2) / (0.1 * zoom * win_width) + 11 * move_x - 0.7,
+		1.5 * (y - win_height / 2) / (0.1 * zoom * win_height) + 11 * move_y);
 	int pixel_id = y * win_width + x;
+	cfloat two = (cfloat)(2.0, 0.0);
 
 	while (iteration < max_iteration)
 	{
-		if (zabs(f(c)) < 0.0001)
+		if (c.x * c.x + c.y * c.y > 48)
 			break ;
-		c = zsubtract(c, zdiv(f(c), df(c)));
+		c = zpow(zdiv(zpow(c, 2), (zsubtract(zmult(c, two), two))), 2);
 		iteration++;
 	}
 	if (iteration == max_iteration)

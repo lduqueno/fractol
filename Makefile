@@ -6,7 +6,7 @@
 #    By: rlegan <rlegan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/09/13 16:35:11 by rlegan            #+#    #+#              #
-#    Updated: 2019/06/14 11:01:06 by lduqueno         ###   ########.fr        #
+#    Updated: 2019/06/14 13:32:21 by lduqueno         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ SRC_FILES = main.c \
 			fractal_mandelbrot.c \
 			fractal_burningship.c \
 			fractal_tricorn.c \
-			fractal_flower.c \
+			fractal_magnet.c \
 			fractal_newton.c
 LIBFT_DIR = libft
 OBJS_DIR = objs

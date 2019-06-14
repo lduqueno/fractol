@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/14 10:51:58 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/06/14 11:31:18 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/06/14 12:02:40 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,10 @@ static void			open_file(t_data *data)
 	char		*file_name;
 	int			fd;
 
-
 	if (!(file_name = ft_strjoin("opencl/", data->fract->name))
 			|| !(file_name = ft_strjoin_free(file_name, ".cl"))
 			|| !(data->opencl->source_str = ft_strnew(MAX_SOURCE_SIZE)))
 		error(data, MALLOC_ERROR);
-
 	if ((fd = open(file_name, O_RDONLY)) < 0)
 		error(data, OPEN_ERROR);
 	free(file_name);
