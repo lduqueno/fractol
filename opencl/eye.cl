@@ -51,7 +51,7 @@ __kernel void eye(__global int* pixels, int win_height, int win_width,
 
 	while (iteration < max_iteration)
 	{
-		if (c.x * c.x + c.y * c.y >= 4)
+		if (c.x * c.x + c.y * c.y >= 4 && zabs(c) < 25)
 			break ;
 		c = zdiv(c, zsubtract(c, zpow(c, 3)));
 		iteration++;

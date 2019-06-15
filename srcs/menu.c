@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 17:40:20 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/06/05 17:55:40 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/06/15 18:47:15 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void		update_color_preset(t_data *data)
 		data->color_value += COLORS_COUNT * 100;
 	while (i < COLORS_COUNT)
 	{
-		get_colors(FALSE)[i] = data->color_value - i * 100;
+		get_colors(data, FALSE)[i] = data->color_value - i * 100;
 		i++;
 	}
 }
@@ -35,21 +35,23 @@ static void		draw_menu_next(t_data *data)
 		"[R] -> Reset image");
 	draw_str_centered(data, WIN_X + MENU_X / 2, (float)((float)WIN_Y / 1.5),
 		"[F] -> Export as .fdf");
+	draw_str_centered(data, WIN_X + MENU_X / 2, (float)((float)WIN_Y / 1.41),
+		"[1/2/3] -> Colors");
 	if (ft_strequ(data->fract->name, "julia"))
 		draw_str_centered(data, WIN_X + MENU_X / 2,
-			(float)((float)WIN_Y / 1.42), "[L] -> Lock shape");
-	draw_str_centered(data, WIN_X + MENU_X / 2, (float)((float)WIN_Y / 1.33),
-		"------");
+			(float)((float)WIN_Y / 1.33), "[L] -> Lock shape");
 	draw_str_centered(data, WIN_X + MENU_X / 2, (float)((float)WIN_Y / 1.27),
+		"------");
+	draw_str_centered(data, WIN_X + MENU_X / 2, (float)((float)WIN_Y / 1.21),
 		"Use the mouse scroll");
-	draw_str_centered(data, WIN_X + MENU_X / 2, (float)((float)WIN_Y / 1.24),
+	draw_str_centered(data, WIN_X + MENU_X / 2, (float)((float)WIN_Y / 1.18),
 		"to zoom");
 	if (ft_strequ(data->fract->name, "julia"))
 	{
 		draw_str_centered(data, WIN_X + MENU_X / 2,
-			(float)((float)WIN_Y / 1.17), "Move your mouse to");
+			(float)((float)WIN_Y / 1.13), "Move your mouse to");
 		draw_str_centered(data, WIN_X + MENU_X / 2,
-			(float)((float)WIN_Y / 1.14), "change shape");
+			(float)((float)WIN_Y / 1.10), "change shape");
 	}
 }
 

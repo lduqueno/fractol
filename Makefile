@@ -6,7 +6,7 @@
 #    By: rlegan <rlegan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/09/13 16:35:11 by rlegan            #+#    #+#              #
-#    Updated: 2019/06/15 15:55:17 by lduqueno         ###   ########.fr        #
+#    Updated: 2019/06/15 19:12:30 by lduqueno         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ SRC_FILES = main.c \
 			draw_thread.c \
 			draw_opencl.c \
 			draw.c \
+			colors.c \
 			menu.c \
 			export_fdf.c \
 			complex.c \

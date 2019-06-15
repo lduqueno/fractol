@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:00:43 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/06/15 15:40:49 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/06/15 17:34:51 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,53 +29,11 @@ void			init_default_values(t_data *data)
 	data->lock_shape = TRUE;
 	data->mouse_x = 0;
 	data->mouse_y = 0;
+	data->color_palette = 0;
 	data->fract->constants.r = JULIA_CST_R;
 	data->fract->constants.i = JULIA_CST_I;
 	data->max_iteration = data->fract->max_iteration;
-	get_colors(TRUE);
-}
-
-/*
-**	Get the color shade (and init it if 'init' is TRUE)
-*/
-
-int				*get_colors(t_bool init)
-{
-	static int	colors[COLORS_COUNT] = {0};
-
-	if (init)
-	{
-		colors[0] = 0x421E0F;
-		colors[1] = 0x19071A;
-		colors[2] = 0x09012F;
-		colors[3] = 0x040449;
-		colors[4] = 0x000764;
-		colors[5] = 0x0C2C8A;
-		colors[6] = 0x1852B1;
-		colors[7] = 0x397DD1;
-		colors[8] = 0x86B5E5;
-		colors[9] = 0xD3ECF8;
-		colors[10] = 0xF1E9BF;
-		colors[11] = 0xF8C95F;
-		colors[12] = 0xFFAA00;
-		colors[13] = 0xCC8000;
-		colors[14] = 0x995700;
-		colors[15] = 0x6A3403;
-	}
-	return (colors);
-}
-
-/*
-**	Given an iteration, returns a color
-*/
-
-int				color_from_iteration(int iteration, int max_iteration)
-{
-	if (iteration < 0)
-		iteration = 1;
-	if (iteration == max_iteration)
-		return (0x000000);
-	return (get_colors(FALSE)[iteration % COLORS_COUNT]);
+	get_colors(data, TRUE);
 }
 
 /*

@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:01:17 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/06/15 16:10:31 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/06/15 17:46:03 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ typedef struct			s_data
 	double				move_y;
 	double				mouse_x;
 	double				mouse_y;
+	int					color_palette;
 	unsigned int		max_iteration;
 	t_bool				auto_zoom;
 	t_bool				lock_shape;
@@ -149,8 +150,8 @@ int						input_mouse_release(int btn, int x, int y,
 int						input_keyboard(int keycode, t_data *data);
 int						input_loop(t_data *data);
 
-int						*get_colors(t_bool init);
-int						color_from_iteration(int iteration, int max_iteration);
+int						*get_colors(t_data *data, t_bool init);
+int						color_from_iteration(t_data *data, int iteration);
 t_bool					change_color_by_mouse(t_data *data, int y, int x);
 
 int						draw_image(t_data *data);

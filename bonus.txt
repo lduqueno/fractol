@@ -11,6 +11,7 @@
 	- [Auto zoom]
 	- [Augmentation/Diminution des iterations]
 	- [Touche reset]
+	- [Changement palette couleur]
 
 - Calculs
 	- [Multithreading]

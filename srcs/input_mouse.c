@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 18:14:22 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/06/14 11:45:32 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/06/15 17:57:07 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,10 @@ int			input_mouse_press(int btn, int x, int y, t_data *data)
 	else if (btn == 1 && change_color_by_mouse(data, y, x))
 		data->left_clicking = TRUE;
 	return (1);
+}
+
+int			input_red_cross(int keycode, t_data *data)
+{
+	(void)keycode;
+	return (exit_fractol(data, FALSE));
 }

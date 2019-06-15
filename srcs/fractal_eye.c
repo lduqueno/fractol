@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 18:15:55 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/06/15 15:57:59 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/06/15 19:12:14 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int				execute_eye(t_data *data, int y, int x)
 		+ 3 * data->move_y;
 	while (iteration < data->max_iteration)
 	{
-		if (c.r * c.r + c.i * c.i >= 4)
+		if (c.r * c.r + c.i * c.i >= 4 && sqrt(c.r * c.r + c.i * c.i) < 25)
 			break ;
 		c = zdivide(c, zsubtract(c, zpow(c, 3)));
 		iteration++;

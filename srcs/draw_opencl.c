@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:00:43 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/06/14 12:02:06 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/06/15 17:49:14 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void				draw_image_opencl(t_data *data)
 
 	clEnqueueWriteBuffer(data->opencl->command_queue,
 		data->opencl->colors_buffer, CL_TRUE, 0, sizeof(int) * COLORS_COUNT,
-		get_colors(FALSE), 0, NULL, NULL);
+		get_colors(data, FALSE), 0, NULL, NULL);
 	clSetKernelArg(data->opencl->kernel, 0, sizeof(cl_mem),
 		&data->opencl->pixels_buffer);
 	clSetKernelArg(data->opencl->kernel, 1, sizeof(int), &dimensions[1]);
