@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:00:43 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/06/05 17:54:37 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/06/15 15:40:49 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void			init_default_values(t_data *data)
 	data->zoom = 1;
 	data->move_x = 0;
 	data->move_y = 0;
-	data->max_iteration = 75;
 	data->auto_zoom = FALSE;
 	data->left_clicking = FALSE;
 	data->lock_shape = TRUE;
@@ -32,6 +31,7 @@ void			init_default_values(t_data *data)
 	data->mouse_y = 0;
 	data->fract->constants.r = JULIA_CST_R;
 	data->fract->constants.i = JULIA_CST_I;
+	data->max_iteration = data->fract->max_iteration;
 	get_colors(TRUE);
 }
 

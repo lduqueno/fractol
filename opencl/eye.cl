@@ -37,7 +37,7 @@ inline cfloat zadd(cfloat a, cfloat b)
 	return (cfloat)(a.x + b.x, a.y + b.y);
 }
 
-__kernel void magnet(__global int* pixels, int win_height, int win_width,
+__kernel void eye(__global int* pixels, int win_height, int win_width,
 					int max_iteration, double zoom, double move_x, double move_y,
 					double cst_r, double cst_i, int color_count, __global int *colors,
 					__global int *iterations)
@@ -45,16 +45,15 @@ __kernel void magnet(__global int* pixels, int win_height, int win_width,
 	int iteration = 0;
 	int x = get_global_id(0);
 	int y = get_global_id(1);
-	cfloat c = (cfloat)(1.5 * (x - win_width / 2) / (0.1 * zoom * win_width) + 11 * move_x - 0.7,
-		1.5 * (y - win_height / 2) / (0.1 * zoom * win_height) + 11 * move_y);
+	cfloat c = (cfloat)((x - win_width / 2) / (0.2 * zoom * win_width) + 3 * move_x,
+		(y - win_height / 2) / (0.2 * zoom * win_height) + 3 * move_y);
 	int pixel_id = y * win_width + x;
-	cfloat two = (cfloat)(2.0, 0.0);
 
 	while (iteration < max_iteration)
 	{
-		if (c.x * c.x + c.y * c.y > 48)
+		if (c.x * c.x + c.y * c.y >= 4)
 			break ;
-		c = zpow(zdiv(zpow(c, 2), (zsubtract(zmult(c, two), two))), 2);
+		c = zdiv(c, zsubtract(c, zpow(c, 3)));
 		iteration++;
 	}
 	if (iteration == max_iteration)

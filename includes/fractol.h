@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:01:17 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/06/14 16:16:08 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/06/15 15:55:32 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ typedef struct			s_fract
 {
 	char				*name;
 	t_complex			constants;
+	unsigned int		max_iteration;
 	int					(*execute)(t_data *, int, int);
 }						t_fract;
 
@@ -136,7 +137,7 @@ int						execute_julia(t_data *data, int y, int x);
 int						execute_mandelbrot(t_data *data, int y, int x);
 int						execute_burningship(t_data *data, int y, int x);
 int						execute_tricorn(t_data *data, int y, int x);
-int						execute_magnet(t_data *data, int y, int x);
+int						execute_eye(t_data *data, int y, int x);
 int						execute_newton(t_data *data, int y, int x);
 int						execute_nova(t_data *data, int y, int x);
 
@@ -169,6 +170,7 @@ double					zabs(t_complex complex);
 t_complex				zmultiply(t_complex a, t_complex b);
 t_complex				zpow(t_complex complex, int n);
 t_complex				zsubtract(t_complex a, t_complex b);
+t_complex				zadd(t_complex a, t_complex b);
 t_complex				zdivide(t_complex a, t_complex b);
 
 #endif

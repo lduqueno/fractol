@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/14 10:51:58 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/06/14 13:21:40 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/06/15 15:33:07 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,15 @@ t_complex	zsubtract(t_complex a, t_complex b)
 
 	result.r = a.r - b.r;
 	result.i = a.i - b.i;
+	return (result);
+}
+
+t_complex	zadd(t_complex a, t_complex b)
+{
+	t_complex	result;
+
+	result.r = a.r + b.r;
+	result.i = a.i + b.i;
 	return (result);
 }
 

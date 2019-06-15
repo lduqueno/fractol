@@ -6,7 +6,7 @@
 #    By: rlegan <rlegan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/09/13 16:35:11 by rlegan            #+#    #+#              #
-#    Updated: 2019/06/14 16:16:43 by lduqueno         ###   ########.fr        #
+#    Updated: 2019/06/15 15:55:17 by lduqueno         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ SRC_FILES = main.c \
 			fractal_mandelbrot.c \
 			fractal_burningship.c \
 			fractal_tricorn.c \
-			fractal_magnet.c \
+			fractal_eye.c \
 			fractal_newton.c \
 			fractal_nova.c
 LIBFT_DIR = libft

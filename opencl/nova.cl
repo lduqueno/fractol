@@ -45,16 +45,16 @@ __kernel void nova(__global int* pixels, int win_height, int win_width,
 	int iteration = 0;
 	int x = get_global_id(0);
 	int y = get_global_id(1);
-	cfloat c = (cfloat)(1.5 * (x - win_width / 2) / (0.5 * zoom * win_width) + 2 * move_x,
-		1.5 * (y - win_height / 2) / (0.5 * zoom * win_height) + 2 * move_y);
+	cfloat c = (cfloat)(1.5 * (x - win_width / 2) / (0.5 * zoom * win_width) + move_x,
+		1.5 * (y - win_height / 2) / (0.5 * zoom * win_height) + move_y);
 	int pixel_id = y * win_width + x;
-	cfloat three = (cfloat)(.5, 0.0);
+	cfloat add = (cfloat)(1.2, 0.0);
 
 	while (iteration < max_iteration)
 	{
 		if (c.x * c.x + c.y * c.y >= 8)
 			break ;
-		c = zmult(c, zsubtract(c, zpow(c, 3))) + three;
+		c = zadd(zmult(c, zsubtract(c, zpow(c, 3))), add);
 		iteration++;
 	}
 	if (iteration == max_iteration)
