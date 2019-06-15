@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:01:17 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/06/15 15:55:32 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/06/15 16:10:31 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,7 +166,6 @@ void					close_opencl(t_opencl *cl);
 
 void					export_to_fdf(t_data *data);
 
-double					zabs(t_complex complex);
 t_complex				zmultiply(t_complex a, t_complex b);
 t_complex				zpow(t_complex complex, int n);
 t_complex				zsubtract(t_complex a, t_complex b);

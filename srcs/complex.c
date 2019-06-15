@@ -6,17 +6,12 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/14 10:51:58 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/06/15 15:33:07 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/06/15 16:10:20 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 #include "math.h"
-
-double		zabs(t_complex complex)
-{
-	return (sqrt(complex.r * complex.r + complex.i * complex.i));
-}
 
 t_complex	zmultiply(t_complex a, t_complex b)
 {

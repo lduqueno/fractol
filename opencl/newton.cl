@@ -57,13 +57,15 @@ __kernel void newton(__global int* pixels, int win_height, int win_width,
 	int y = get_global_id(1);
 	cfloat c = (cfloat)((x - win_width / 2) / (0.01 * zoom * win_width) + 30 * move_x,
 		(y - win_height / 2) / (0.01 * zoom * win_height) + 30 * move_y);
+	cfloat func;
 	int pixel_id = y * win_width + x;
 
 	while (iteration < max_iteration)
 	{
-		if (zabs(f(c)) < 0.0001)
+		func = f(c);
+		if (zabs(func) < 0.0001)
 			break ;
-		c = zsubtract(c, zdiv(f(c), df(c)));
+		c = zsubtract(c, zdiv(func, df(c)));
 		iteration++;
 	}
 	if (iteration == max_iteration)

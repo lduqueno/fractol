@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 18:15:55 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/06/13 16:19:07 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/06/15 16:12:06 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,17 @@ int					execute_newton(t_data *data, int y, int x)
 {
 	unsigned int	iteration;
 	t_complex		c;
+	t_complex		func;
 
 	iteration = 0;
 	c.r = (x - WIN_X / 2) / (0.01 * data->zoom * WIN_X) + 17 * data->move_x;
 	c.i = (y - WIN_Y / 2) / (0.01 * data->zoom * WIN_Y) + 17 * data->move_y;
 	while (iteration < data->max_iteration)
 	{
-		if (zabs(f(c)) < 0.0001)
+		func = f(c);
+		if (sqrt(func.r * func.r + func.i * func.i) < 0.0001)
 			break ;
-		c = zsubtract(c, zdivide(f(c), df(c)));
+		c = zsubtract(c, zdivide(func, df(c)));
 		iteration++;
 	}
 	return (iteration);

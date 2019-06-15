@@ -7,7 +7,7 @@
 
 - Controles
 	- [Zoom sur la souris]
-	- [Deplacement touches directionelles]
+	- [Deplacement touches directionnelles]
 	- [Auto zoom]
 	- [Augmentation/Diminution des iterations]
 	- [Touche reset]
@@ -15,6 +15,7 @@
 - Calculs
 	- [Multithreading]
 	- [OpenCL]
+	- [Calculs sur float]
 
 - Compilation
 	- [make WIN_X=1000 WIN_Y=1000 pour changer la taille de la fenetre]
