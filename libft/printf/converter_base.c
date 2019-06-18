@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 17:15:03 by lduqueno          #+#    #+#             */
-/*   Updated: 2018/12/14 17:26:01 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/06/18 14:04:38 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ char		*convert_base(va_list ap, char *base, t_context *context, char *arg)
 
 char		*from_uint_to_octal(va_list ap, t_context *context)
 {
-	return (convert_base(ap, "01234567", context, has_flag(context, "#") ?
-		"0" : NULL));
+	return (convert_base(ap, "01234567", context, has_flag(context, "#")
+		? "0" : NULL));
 }
 
 char		*from_uint_to_uint(va_list ap, t_context *context)

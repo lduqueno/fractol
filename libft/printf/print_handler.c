@@ -6,27 +6,26 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/14 13:57:09 by lduqueno          #+#    #+#             */
-/*   Updated: 2018/12/16 15:47:56 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/06/18 14:07:13 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-t_type			g_types[FORMAT_COUNT] =
-{
-	(t_type) { .format = "c", .execute = &from_char },
-	(t_type) { .format = "s", .execute = &from_str },
-	(t_type) { .format = "p", .execute = &from_ptr },
-	(t_type) { .format = "d", .execute = &from_int },
-	(t_type) { .format = "i", .execute = &from_int },
-	(t_type) { .format = "o", .execute = &from_uint_to_octal },
-	(t_type) { .format = "u", .execute = &from_uint_to_uint },
-	(t_type) { .format = "x", .execute = &from_uint_to_uhex_low },
-	(t_type) { .format = "X", .execute = &from_uint_to_uhex_upp },
-	(t_type) { .format = "f", .execute = &from_double },
-	(t_type) { .format = "b", .execute = &from_binary },
-	(t_type) { .format = "bo", .execute = &from_boolean },
-	(t_type) { .format = "%", .execute = &from_default }
+t_type			g_types[FORMAT_COUNT] = {
+	(t_type){ .format = "c", .execute = &from_char },
+	(t_type){ .format = "s", .execute = &from_str },
+	(t_type){ .format = "p", .execute = &from_ptr },
+	(t_type){ .format = "d", .execute = &from_int },
+	(t_type){ .format = "i", .execute = &from_int },
+	(t_type){ .format = "o", .execute = &from_uint_to_octal },
+	(t_type){ .format = "u", .execute = &from_uint_to_uint },
+	(t_type){ .format = "x", .execute = &from_uint_to_uhex_low },
+	(t_type){ .format = "X", .execute = &from_uint_to_uhex_upp },
+	(t_type){ .format = "f", .execute = &from_double },
+	(t_type){ .format = "b", .execute = &from_binary },
+	(t_type){ .format = "bo", .execute = &from_boolean },
+	(t_type){ .format = "%", .execute = &from_default }
 };
 
 static t_type	*type_from_str(const char *format, int start_index)
