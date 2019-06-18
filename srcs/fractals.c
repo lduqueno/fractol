@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractal.c                                          :+:      :+:    :+:   */
+/*   fractals.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 16:32:54 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/06/15 19:05:17 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/06/18 13:18:13 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_fract		*init_fractals(void)
 	static	t_fract		fractals[FRACTAL_COUNT];
 
 	fractals[0] = (t_fract) { .name = "julia", (t_complex){ .r = JULIA_CST_R,
-		.i = JULIA_CST_I },  .max_iteration = 75, .execute = execute_julia };
+		.i = JULIA_CST_I }, .max_iteration = 75, .execute = execute_julia };
 	fractals[1] = (t_fract) { .name = "mandelbrot", .max_iteration = 75,
 		.execute = execute_mandelbrot };
 	fractals[2] = (t_fract) { .name = "burningship", .max_iteration = 75,
@@ -35,6 +35,8 @@ t_fract		*init_fractals(void)
 		.execute = execute_newton };
 	fractals[6] = (t_fract) { .name = "nova", .max_iteration = 45,
 		.execute = execute_nova };
+	fractals[7] = (t_fract) { .name = "flower", .max_iteration = 30,
+		.execute = execute_flower };
 	return (fractals);
 }
 

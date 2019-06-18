@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 16:58:30 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/06/15 17:46:41 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/06/18 13:18:47 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ static void			*draw_lines_thread(void *arg)
 		{
 			result = (*(context->data->fract->execute))(context->data, y, x);
 			context->data->iterations_array[y * WIN_X + x] = result;
-			context->data->pixels[y * WIN_X + x]
-				= color_from_iteration(context->data, result);
+			context->data->pixels[y * WIN_X + x] = color_from_iteration(
+					context->data, result);
 		}
 	}
 	free(context);

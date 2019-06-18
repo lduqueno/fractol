@@ -6,7 +6,7 @@
 #    By: rlegan <rlegan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/09/13 16:35:11 by rlegan            #+#    #+#              #
-#    Updated: 2019/06/15 19:12:30 by lduqueno         ###   ########.fr        #
+#    Updated: 2019/06/18 13:04:12 by lduqueno         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ SRC_DIR = srcs
 SRC_FILES = main.c \
 			error.c \
 			free.c \
-			fractal.c \
+			fractals.c \
 			input.c \
 			input_mouse.c \
 			init_opencl.c \
@@ -37,7 +37,8 @@ SRC_FILES = main.c \
 			fractal_tricorn.c \
 			fractal_eye.c \
 			fractal_newton.c \
-			fractal_nova.c
+			fractal_nova.c \
+			fractal_flower.c
 LIBFT_DIR = libft
 OBJS_DIR = objs
 OBJS_FILES = $(SRC_FILES:.c=.o)
