@@ -6,7 +6,7 @@
 #    By: rlegan <rlegan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/09/13 16:35:11 by rlegan            #+#    #+#              #
-#    Updated: 2019/06/18 13:04:12 by lduqueno         ###   ########.fr        #
+#    Updated: 2019/06/19 15:18:40 by lduqueno         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ SRC_FILES = main.c \
 			error.c \
 			free.c \
 			fractals.c \
-			input.c \
+			input_keyboard.c \
 			input_mouse.c \
 			init_opencl.c \
 			draw_thread.c \

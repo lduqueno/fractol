@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:01:17 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/06/18 13:02:22 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/06/19 15:23:16 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef char				t_bool;
 
 # define PI 3.14159265359
 
-# define THREAD_COUNT		500
+# define THREAD_COUNT		16
 
 # define MAX_SOURCE_SIZE	0x100000
 # define DATA_COUNT			7
@@ -127,7 +127,7 @@ typedef struct			s_split_context
 void					set_pointers_to_null(t_data *data);
 void					init_default_values(t_data *data);
 
-int						exit_fractol(t_data *data, t_bool free);
+int						exit_fractol(t_data *data, t_bool free_data);
 int						error(t_data *data, char *error_msg);
 void					free_all(t_data *data);
 

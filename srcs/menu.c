@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 17:40:20 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/06/15 18:47:15 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/06/19 15:06:05 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,11 @@ void			draw_menu(t_data *data)
 {
 	int		avoid;
 
-	if ((data->menu_ptr = mlx_xpm_file_to_image(data->mlx_ptr, "resources/color"
-			"_wheel.xpm", &data->wheel_width, &data->wheel_height)) == NULL)
+	if (!(data->menu_ptr = mlx_xpm_file_to_image(data->mlx_ptr, "resources/c"
+					"olor_wheel.xpm", &data->wheel_width, &data->wheel_height)))
 		error(data, LOAD_IMG_ERROR);
 	data->menu_pixels = (unsigned int *)mlx_get_data_addr(data->menu_ptr,
-		&avoid, &avoid, &avoid);
+			&avoid, &avoid, &avoid);
 	draw_str_centered(data, WIN_X + MENU_X / 2, WIN_Y / 30, "Color picker");
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->menu_ptr,
 		WIN_X + MENU_X / 2 - data->wheel_width / 2, WIN_Y / 12);
@@ -90,12 +90,10 @@ void			draw_variables(t_data *data)
 
 	ft_bzero(text, 35);
 	ft_sprintf(text, "Iteration : %d\n", data->max_iteration);
-	mlx_string_put(data->mlx_ptr, data->win_ptr, 5, 5,
-		0xFFFFFF, text);
+	mlx_string_put(data->mlx_ptr, data->win_ptr, 5, 5, 0xFFFFFF, text);
 	ft_bzero(text, 35);
 	ft_sprintf(text, "Zoom : %.2f\n", data->zoom);
-	mlx_string_put(data->mlx_ptr, data->win_ptr, 5, 5 * 5,
-		0xFFFFFF, text);
+	mlx_string_put(data->mlx_ptr, data->win_ptr, 5, 5 * 5, 0xFFFFFF, text);
 }
 
 t_bool			change_color_by_mouse(t_data *data, int y, int x)

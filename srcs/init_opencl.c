@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/14 10:51:58 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/06/14 12:02:40 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/06/19 14:57:17 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ static void			print_error_log(t_data *data)
 	size_t		build_log_len;
 
 	ret = clGetProgramBuildInfo(data->opencl->program, data->opencl->device_id,
-		CL_PROGRAM_BUILD_LOG, 0, NULL, &build_log_len);
+			CL_PROGRAM_BUILD_LOG, 0, NULL, &build_log_len);
 	if (ret)
 		error(data, OPENCL_LOG_ERROR);
 	if (!(buff_erro = (char *)malloc(sizeof(char) * build_log_len)))
 		error(data, MALLOC_ERROR);
 	ret = clGetProgramBuildInfo(data->opencl->program, data->opencl->device_id,
-		CL_PROGRAM_BUILD_LOG, build_log_len, buff_erro, NULL);
+			CL_PROGRAM_BUILD_LOG, build_log_len, buff_erro, NULL);
 	if (ret)
 		error(data, OPENCL_LOG_ERROR);
 	ft_dprintf(STDERR_FILENO, "Build log: \n%s\n", buff_erro);
@@ -41,20 +41,21 @@ static void			init_opencl_next(t_data *data)
 
 	cl = data->opencl;
 	cl->context = clCreateContext(NULL, 1, &cl->device_id, NULL, NULL, &ret);
-	cl->command_queue = clCreateCommandQueue(cl->context,
-		cl->device_id, 0, &ret);
+	cl->command_queue = clCreateCommandQueue(cl->context, cl->device_id, 0,
+			&ret);
 	cl->program = clCreateProgramWithSource(cl->context, 1,
-		(const char **)&cl->source_str, (const size_t *)&cl->source_size, &ret);
+			(const char **)&cl->source_str, (const size_t *)&cl->source_size,
+			&ret);
 	ret = clBuildProgram(cl->program, 1, &cl->device_id, NULL, NULL, NULL);
 	if (ret != CL_SUCCESS)
 		print_error_log(data);
 	cl->kernel = clCreateKernel(cl->program, data->fract->name, &ret);
 	data->opencl->pixels_buffer = clCreateBuffer(data->opencl->context,
-		CL_MEM_READ_WRITE, WIN_X * WIN_Y * sizeof(int), NULL, NULL);
+			CL_MEM_READ_WRITE, WIN_X * WIN_Y * sizeof(int), NULL, NULL);
 	data->opencl->colors_buffer = clCreateBuffer(data->opencl->context,
-		CL_MEM_READ_ONLY, sizeof(int) * COLORS_COUNT, NULL, NULL);
+			CL_MEM_READ_ONLY, sizeof(int) * COLORS_COUNT, NULL, NULL);
 	data->opencl->iterations_buffer = clCreateBuffer(data->opencl->context,
-		CL_MEM_READ_WRITE, WIN_X * WIN_Y * sizeof(int), NULL, NULL);
+			CL_MEM_READ_WRITE, WIN_X * WIN_Y * sizeof(int), NULL, NULL);
 }
 
 static void			open_file(t_data *data)
@@ -64,7 +65,7 @@ static void			open_file(t_data *data)
 
 	if (!(file_name = ft_strjoin("opencl/", data->fract->name))
 			|| !(file_name = ft_strjoin_free(file_name, ".cl"))
-			|| !(data->opencl->source_str = ft_strnew(MAX_SOURCE_SIZE)))
+				|| !(data->opencl->source_str = ft_strnew(MAX_SOURCE_SIZE)))
 		error(data, MALLOC_ERROR);
 	if ((fd = open(file_name, O_RDONLY)) < 0)
 		error(data, OPEN_ERROR);

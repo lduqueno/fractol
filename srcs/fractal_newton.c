@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 18:15:55 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/06/15 16:12:06 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/06/19 14:50:08 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ int					execute_newton(t_data *data, int y, int x)
 	t_complex		func;
 
 	iteration = 0;
-	c.r = (x - WIN_X / 2) / (0.01 * data->zoom * WIN_X) + 17 * data->move_x;
-	c.i = (y - WIN_Y / 2) / (0.01 * data->zoom * WIN_Y) + 17 * data->move_y;
+	c.r = (x - WIN_X / 2) / (0.01 * data->zoom * WIN_X) + 30 * data->move_x;
+	c.i = (y - WIN_Y / 2) / (0.01 * data->zoom * WIN_Y) + 30 * data->move_y;
 	while (iteration < data->max_iteration)
 	{
 		func = f(c);

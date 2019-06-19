@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 16:12:34 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/06/05 17:45:01 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/06/19 16:08:35 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 ** Free all the pointers and exit the program
 */
 
-int			exit_fractol(t_data *data, t_bool free)
+int			exit_fractol(t_data *data, t_bool free_data)
 {
-	if (free)
+	if (free_data)
 		free_all(data);
 	exit(EXIT_SUCCESS);
 	return (EXIT_SUCCESS);
