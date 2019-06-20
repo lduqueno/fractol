@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 16:58:30 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/06/18 13:18:47 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/06/20 17:02:28 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,9 @@ void				draw_image_thread(t_data *data)
 		last_line = context->end_y;
 		if (context->end_y >= WIN_Y || thread_id == THREAD_COUNT - 1)
 			context->end_y = WIN_Y;
-		pthread_create(&threads[thread_id], NULL, draw_lines_thread, context);
+		if (pthread_create(&threads[thread_id], NULL, draw_lines_thread,
+				context) != 0)
+			error(data, MALLOC_ERROR);
 		thread_id++;
 	}
 	wait_threads(threads);
