@@ -6,13 +6,17 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/14 10:51:58 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/06/19 14:57:17 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/06/21 10:01:20 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 #include "libft.h"
 #include "ft_printf.h"
+
+/*
+**	If kernel fail, print the error log
+*/
 
 static void			print_error_log(t_data *data)
 {
@@ -33,6 +37,10 @@ static void			print_error_log(t_data *data)
 	ft_dprintf(STDERR_FILENO, "Build log: \n%s\n", buff_erro);
 	error(data, OPENCL_ERROR);
 }
+
+/*
+**	Create all necessary buffers for opencl
+*/
 
 static void			init_opencl_next(t_data *data)
 {
@@ -58,6 +66,10 @@ static void			init_opencl_next(t_data *data)
 			CL_MEM_READ_WRITE, WIN_X * WIN_Y * sizeof(int), NULL, NULL);
 }
 
+/*
+**	Open fractal's .cl file
+*/
+
 static void			open_file(t_data *data)
 {
 	char		*file_name;
@@ -75,6 +87,10 @@ static void			open_file(t_data *data)
 		error(data, READ_ERROR);
 	close(fd);
 }
+
+/*
+**	Init opencl - handle float or double precision
+*/
 
 void				init_opencl(t_data *data, t_bool use_float)
 {

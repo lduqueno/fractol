@@ -6,12 +6,16 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 18:15:55 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/06/15 15:59:54 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/06/21 09:59:02 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 #include "math.h"
+
+/*
+**	Nova fractal
+*/
 
 int				execute_nova(t_data *data, int y, int x)
 {

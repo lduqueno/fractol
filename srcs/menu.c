@@ -6,7 +6,7 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 17:40:20 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/06/19 15:06:05 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/06/21 10:03:45 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 #include "mlx.h"
 #include "ft_printf.h"
 #include "libft.h"
+
+/*
+**	Update color palette
+*/
 
 static void		update_color_preset(t_data *data)
 {
@@ -28,6 +32,10 @@ static void		update_color_preset(t_data *data)
 		i++;
 	}
 }
+
+/*
+**	Draw second part of the menu
+*/
 
 static void		draw_menu_next(t_data *data)
 {
@@ -54,6 +62,10 @@ static void		draw_menu_next(t_data *data)
 			(float)((float)WIN_Y / 1.10), "change shape");
 	}
 }
+
+/*
+**	Draw first part of the menu
+*/
 
 void			draw_menu(t_data *data)
 {
@@ -84,6 +96,10 @@ void			draw_menu(t_data *data)
 	draw_menu_next(data);
 }
 
+/*
+**	Draw top-left informations (zoom and iteration)
+*/
+
 void			draw_variables(t_data *data)
 {
 	char	text[35];
@@ -95,6 +111,10 @@ void			draw_variables(t_data *data)
 	ft_sprintf(text, "Zoom : %.2f\n", data->zoom);
 	mlx_string_put(data->mlx_ptr, data->win_ptr, 5, 5 * 5, 0xFFFFFF, text);
 }
+
+/*
+**	Change color palette using mouse x and mouse y
+*/
 
 t_bool			change_color_by_mouse(t_data *data, int y, int x)
 {

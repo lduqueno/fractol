@@ -6,12 +6,16 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 18:15:55 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/06/14 11:43:26 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/06/21 09:59:10 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 #include "math.h"
+
+/*
+**	Tricorn fractal
+*/
 
 int				execute_tricorn(t_data *data, int y, int x)
 {
@@ -22,7 +26,7 @@ int				execute_tricorn(t_data *data, int y, int x)
 
 	iteration = 0;
 	constants.r = 3 * ((x - WIN_X / 2) / (0.8 * data->zoom * WIN_X)
-		+ data->move_x) - 0.025;
+			+ data->move_x) - 0.025;
 	constants.i = 3 * (y - WIN_Y / 2) / (0.8 * data->zoom * WIN_Y)
 		+ data->move_y;
 	complex.r = 0;

@@ -6,12 +6,16 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 18:14:22 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/06/15 17:57:07 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/06/21 10:02:31 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 #include "libft.h"
+
+/*
+**	Handle mouse move
+*/
 
 int			input_mouse_move(int x, int y, t_data *data)
 {
@@ -40,6 +44,10 @@ int			input_mouse_move(int x, int y, t_data *data)
 	return (1);
 }
 
+/*
+**	Handle mouse release
+*/
+
 int			input_mouse_release(int btn, int x, int y, t_data *data)
 {
 	(void)x;
@@ -49,6 +57,10 @@ int			input_mouse_release(int btn, int x, int y, t_data *data)
 		data->left_clicking = FALSE;
 	return (1);
 }
+
+/*
+**	Handle mouse press
+*/
 
 int			input_mouse_press(int btn, int x, int y, t_data *data)
 {
@@ -73,6 +85,10 @@ int			input_mouse_press(int btn, int x, int y, t_data *data)
 		data->left_clicking = TRUE;
 	return (1);
 }
+
+/*
+**	Handle click on the top left red cross
+*/
 
 int			input_red_cross(int keycode, t_data *data)
 {

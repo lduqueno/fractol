@@ -6,11 +6,15 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 12:00:43 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/06/19 14:52:30 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/06/21 09:52:59 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+/*
+**	Send arguments to kernel
+*/
 
 static void			set_float_args(t_data *data)
 {
@@ -39,6 +43,10 @@ static void			set_float_args(t_data *data)
 	clSetKernelArg(data->opencl->kernel, 8, sizeof(double),
 		&data->fract->constants.i);
 }
+
+/*
+**	Draw image using opencl
+*/
 
 void				draw_image_opencl(t_data *data)
 {

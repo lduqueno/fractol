@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   input.c                                            :+:      :+:    :+:   */
+/*   input_keyboard.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 17:48:36 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/06/15 17:59:59 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/06/21 10:01:54 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 #include "keys.h"
 #include "float.h"
 #include "ft_printf.h"
+
+/*
+**	Handle keyboard other inputs
+*/
 
 static int	next_input_keyboard(int keycode, t_data *data)
 {
@@ -43,6 +47,10 @@ static int	next_input_keyboard(int keycode, t_data *data)
 	return (draw_image(data));
 }
 
+/*
+**	Handle keyboard inputs
+*/
+
 int			input_keyboard(int keycode, t_data *data)
 {
 	double	increase;
@@ -68,6 +76,10 @@ int			input_keyboard(int keycode, t_data *data)
 		return (next_input_keyboard(keycode, data));
 	return (draw_image(data));
 }
+
+/*
+**	Autozoom loop
+*/
 
 int			input_loop(t_data *data)
 {

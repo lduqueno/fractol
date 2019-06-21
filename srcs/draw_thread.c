@@ -6,12 +6,16 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 16:58:30 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/06/20 17:02:28 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/06/21 09:54:43 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 #include <pthread.h>
+
+/*
+**	This function is called by every thread. Just draw a part of a fractal
+*/
 
 static void			*draw_lines_thread(void *arg)
 {
@@ -38,6 +42,10 @@ static void			*draw_lines_thread(void *arg)
 	return (NULL);
 }
 
+/*
+**	Waiting all the threads before updating image
+*/
+
 static void			wait_threads(pthread_t *threads)
 {
 	int				thread_id;
@@ -49,6 +57,10 @@ static void			wait_threads(pthread_t *threads)
 		thread_id++;
 	}
 }
+
+/*
+**	Split image in several threads
+*/
 
 void				draw_image_thread(t_data *data)
 {

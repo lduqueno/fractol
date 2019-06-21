@@ -1,17 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   burningship.c                                      :+:      :+:    :+:   */
+/*   fractal_burningship.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 17:40:20 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/06/04 16:18:48 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/06/21 09:55:04 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 #include "math.h"
+
+/*
+**	Burningship fractal
+*/
 
 int				execute_burningship(t_data *data, int y, int x)
 {

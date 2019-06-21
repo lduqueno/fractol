@@ -6,12 +6,16 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 18:15:55 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/06/19 14:50:08 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/06/21 09:58:53 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 #include "math.h"
+
+/*
+**	Function f
+*/
 
 static t_complex	f(t_complex c)
 {
@@ -22,6 +26,10 @@ static t_complex	f(t_complex c)
 	return (zsubtract(zpow(c, 3), one));
 }
 
+/*
+**	Derivate the function f
+*/
+
 static t_complex	df(t_complex c)
 {
 	t_complex		three;
@@ -30,6 +38,10 @@ static t_complex	df(t_complex c)
 	three.i = 0;
 	return (zmultiply(zmultiply(c, c), three));
 }
+
+/*
+**	Newton fractal
+*/
 
 int					execute_newton(t_data *data, int y, int x)
 {

@@ -6,12 +6,16 @@
 /*   By: lduqueno <lduqueno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 18:15:55 by lduqueno          #+#    #+#             */
-/*   Updated: 2019/06/19 14:54:34 by lduqueno         ###   ########.fr       */
+/*   Updated: 2019/06/21 09:55:39 by lduqueno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 #include "math.h"
+
+/*
+**	Flower fractal
+*/
 
 int				execute_flower(t_data *data, int y, int x)
 {
